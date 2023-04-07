@@ -39,23 +39,23 @@ def on_message(client, userdata, msg):
     for i in range(len(TOPIC)):
         if((msg.topic,msg.qos)==TOPIC[i]):
             mensagem={  
-                'mensagem': int.from_bytes(msg.payload,byteorder='big',signed=True),
+                'mensagem': int(msg.payload),
                 'topico': str(msg.topic),
                 'qos': str(msg.qos)#Caso queira salvar como um inteiro você digita: 
                 };
             
-            with open(f'{TOPIC[i]}.json','w') as f:
+            with open(f'{msg.topic}.json','w') as f:
                 pass
-            with open(f'{TOPIC[i]}.json','r') as f:
+            with open(f'{msg.topic}.json','r') as f:
                 conteudo_json=f.read()
                 if not conteudo_json:
-                    with open(f'{TOPIC[i]}.json','w') as s:
+                    with open(f'{msg.topic}.json','w') as s:
                         json.dump([],s)
-            with open(f'{TOPIC[i]}.json','r') as f:
+            with open(f'{msg.topic}.json','r') as f:
                 guardando_json=json.load(f)
                 
             guardando_json.append(mensagem)
-            with open(f'{TOPIC[i]}.json','w') as f:
+            with open(f'{msg.topic}.json','w') as f:
                 json.dump(guardando_json,f)
 
 
