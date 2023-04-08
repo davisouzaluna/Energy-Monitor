@@ -15,3 +15,4 @@ VALUES
 
 SELECT * FROM consumo;
 
+
