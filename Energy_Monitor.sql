@@ -1,10 +1,13 @@
+# Banco de dados para armazenar dados da corrente dos dispositivos do projeto energy_monitor
+
 CREATE DATABASE energy_monitor;
 USE energy_monitor;
 
 CREATE TABLE consumo (
-  id INT NOT NULL,
+  id INT NOT NULL PRIMARY KEY,
   aparelho VARCHAR(50),
-  corrente INT
+  corrente INT,
+  CONSTRAINT PK_consumo PRIMARY KEY (id)
 );
 
 INSERT INTO consumo (id, aparelho, corrente)
@@ -14,5 +17,3 @@ VALUES
     (3, 'sanduicheira', 2);
 
 SELECT * FROM consumo;
-
-
