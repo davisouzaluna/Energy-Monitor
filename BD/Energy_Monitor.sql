@@ -17,4 +17,5 @@ VALUES
     ('geladeira', 10, 0),
     ('ar condicionado', 17, 0),
     ('sanduicheira', 2, 0);
+
 SELECT * FROM consumo;
