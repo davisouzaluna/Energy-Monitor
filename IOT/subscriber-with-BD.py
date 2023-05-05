@@ -14,7 +14,7 @@ db_nome_banco="energy_monitor"
 porta_banco = 3306
 tempo_espera_insert=1#provavelmente não será usado nesse código pois o insert será feito a cada iteração com o broker
 
-operacao_insert= "INSERT INTO consumo(corrente,aparelho,qos) VALUES(%s, %s, %s)"#Não altere muito aqui, mas se alterar, verifique o laço for com os dados do json
+operacao_insert= "INSERT INTO dispositivos(corrente,aparelho,qos) VALUES(%s, %s, %s)"#Não altere muito aqui, mas se alterar, verifique o laço for com os dados do json
 
   
 #some comments are writted in portuguese. If you want to know about, you can use the google tradutor :p 
@@ -23,7 +23,7 @@ HOST= "test.mosquitto.org"#If you want to set this parameter in a public host, i
 PORT=1883#This is a mosquitto port(when i start my broker) 
 keepalive=60 
 bind_address="" 
-TOPIC=[("microondas",0),("ultrassom",0)]#tupla com tópico e QoS. Pode-se adicionar diversos tópicos e alterar o QoS caso queira 
+TOPIC=[("microondas",0)]#tupla com tópico e QoS. Pode-se adicionar diversos tópicos e alterar o QoS caso queira 
  
 #Só para relembrar: QoS=0 significa que a entrega da mensagem será feita com o melhor esforço, sendo assim adicionada à fila do broker e não tendo a confirmação que o subscriber irá receber a mensagem. Resumindo, a mensagem não é armazenada 
 #QoS=1 significa que há uma garantia de que pelo menos uma vez a mensagem irá ser entregue ao receptor 
@@ -81,18 +81,18 @@ def on_message(client, userdata, msg):
             conexao.commit()
             
             
-            with open(f'{msg.topic}.json','w') as f:
+            with open(f'../FRONT/grafico/src/{msg.topic}.json','w') as f:
                 pass
-            with open(f'{msg.topic}.json','r') as f:
+            with open(f'../FRONT/grafico/src/{msg.topic}.json','r') as f:
                 conteudo_json=f.read()
                 if not conteudo_json:
-                    with open(f'{msg.topic}.json','w') as s:
+                    with open(f'../FRONT/grafico/src/{msg.topic}.json','w') as s:
                         json.dump([],s)
-            with open(f'{msg.topic}.json','r') as f:
+            with open(f'../FRONT/grafico/src/{msg.topic}.json','r') as f:
                 guardando_json=json.load(f)
                 
             guardando_json.append(mensagem)
-            with open(f'{msg.topic}.json','w') as f:
+            with open(f'../FRONT/grafico/src/{msg.topic}.json','w') as f:
                 json.dump(guardando_json,f)
 
 

@@ -3,7 +3,7 @@
 CREATE DATABASE energy_monitor;
 USE energy_monitor;
 
-CREATE TABLE consumo (
+CREATE TABLE dispositivos (
   id INT NOT NULL AUTO_INCREMENT,
   aparelho VARCHAR(50),
   qos INT NOT NULL,
