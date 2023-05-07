@@ -1,15 +1,8 @@
 CREATE DATABASE energy_monitor;
 USE energy_monitor;
 
-CREATE TABLE usuario (
-  id INT NOT NULL AUTO_INCREMENT,
-  nome VARCHAR(255) NOT NULL,
-  email VARCHAR(255) NOT NULL,
-  senha VARCHAR(255) NOT NULL,
-  PRIMARY KEY (id)
-);
 
-CREATE TABLE dispositivo (
+CREATE TABLE dispositivos (
   id INT NOT NULL AUTO_INCREMENT,
   nome VARCHAR(255) NOT NULL,
   MAC VARCHAR(12) NOT NULL,
