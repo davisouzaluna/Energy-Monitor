@@ -85,18 +85,18 @@ def on_message(client, userdata, msg):
             conexao.commit()
             
             
-            with open(f'../FRONT/grafico/src/{msg.topic}.json','w') as f:
+            with open(f'../FRONT/grafico/src/public{msg.topic}.json','w') as f:
                 pass
-            with open(f'../FRONT/grafico/src/{msg.topic}.json','r') as f:
+            with open(f'../FRONT/grafico/src/public{msg.topic}.json','r') as f:
                 conteudo_json=f.read()
                 if not conteudo_json:
-                    with open(f'../FRONT/grafico/src/{msg.topic}.json','w') as s:
+                    with open(f'../FRONT/grafico/src/public{msg.topic}.json','w') as s:
                         json.dump([],s)
-            with open(f'../FRONT/grafico/src/{msg.topic}.json','r') as f:
+            with open(f'../FRONT/grafico/src/public{msg.topic}.json','r') as f:
                 guardando_json=json.load(f)
                 
             guardando_json.append(mensagem)
-            with open(f'../FRONT/grafico/src/{msg.topic}.json','w') as f:
+            with open(f'../FRONT/grafico/src/public{msg.topic}.json','w') as f:
                 json.dump(guardando_json,f)
 
 
