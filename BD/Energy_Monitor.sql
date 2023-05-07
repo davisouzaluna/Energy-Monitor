@@ -2,14 +2,14 @@ CREATE DATABASE energy_monitor;
 USE energy_monitor;
 
 
+/*A tabela de usuários irá referenciar para a tabela de dispositivos e a tabela de dispositivos irá  referenciar a tabela sensor*/
 CREATE TABLE dispositivos (
   id INT NOT NULL AUTO_INCREMENT,
   nome VARCHAR(255) NOT NULL,
-  MAC VARCHAR(12) NOT NULL,
   descricao VARCHAR(255) NOT NULL,
-  usuario_id INT NOT NULL,
+  MAC_FK VARCHAR(12) NOT NULL,
   PRIMARY KEY (id),
-  FOREIGN KEY (usuario_id) REFERENCES usuario(id)
+  FOREIGN KEY (MAC_FK) REFERENCES usuario(id)
 );
 
 CREATE TABLE sensor (
