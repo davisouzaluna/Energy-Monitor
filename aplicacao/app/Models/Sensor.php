@@ -19,5 +19,5 @@ class Sensor extends Model
 
     protected $guarded = [
         'id',
-    ]
+    ];
 }
