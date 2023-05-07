@@ -1,21 +1,32 @@
-# Banco de dados para armazenar dados da corrente dos dispositivos do projeto energy_monitor
-
 CREATE DATABASE energy_monitor;
 USE energy_monitor;
 
+
+/*A tabela de usuários irá referenciar para a tabela de dispositivos e a tabela de dispositivos irá  referenciar a tabela sensor*/
 CREATE TABLE dispositivos (
   id INT NOT NULL AUTO_INCREMENT,
-  aparelho VARCHAR(50),
-  qos INT NOT NULL,
-  corrente INT NOT NULL,
-  CONSTRAINT PK_consumo PRIMARY KEY (id)
+  nome VARCHAR(255) NOT NULL,
+  descricao VARCHAR(255) NOT NULL,
+  MAC_FK VARCHAR(12) NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (MAC_FK) REFERENCES usuario(id)
 );
 
-/* EXEMPLOS DE OPERAÇÕES ENVOLVENDO O BD
-INSERT INTO consumo (aparelho, corrente,qos)
-VALUES
-    ('geladeira', 10, 0),
-    ('ar condicionado', 17, 0),
-    ('sanduicheira', 2, 0);
+CREATE TABLE sensor (
+  id INT NOT NULL AUTO_INCREMENT,
+  MAC VARCHAR(12) NOT NULL,
+  corrente FLOAT NOT NULL,
+  data_hora_medicao DATETIME NOT NULL,
+  qos FLOAT NOT NULL,
+  log_erro_id INT,
+  PRIMARY KEY (id),
+  FOREIGN KEY (log_erro_id) REFERENCES log_erro(id)
+);
 
-SELECT * FROM consumo;
+CREATE TABLE log_erro (
+  id INT NOT NULL AUTO_INCREMENT,
+  tipo VARCHAR(255) NOT NULL,
+  mensagem TEXT NOT NULL,
+  data_hora DATETIME NOT NULL,
+  PRIMARY KEY (id)
+);
