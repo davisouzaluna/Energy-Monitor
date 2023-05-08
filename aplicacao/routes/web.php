@@ -19,4 +19,5 @@ Route::get('/', function () {
 });
 
 
-Route::get('/sensor',[SensorController::class, 'index']);
+Route::get('/sensor10', [SensorController::class, 'ultimosDez'])->name('sensor.ultimos-dez');
+Route::get('/atualiza-dados',[SensorController::class, 'atualizaDados']);
