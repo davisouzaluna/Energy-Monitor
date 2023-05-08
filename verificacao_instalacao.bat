@@ -17,6 +17,7 @@ python -c "import paho.mqtt.client" >nul 2>&1
 if %errorlevel% neq 0 (
     echo paho-mqtt não está instalado. Instalando...
     pip install paho-mqtt
+    
 )
 
 REM Checa se o pacote mosquitto está instalado
@@ -33,5 +34,14 @@ if %errorlevel% neq 0 (
     choco install mosquitto-clients -y
 )
 
+REM Checa se o pacote pymysql está instalado
+python -c "import pymysql" >nul 2>&1
+if %errorlevel% neq 0 (
+    echo pymysql não está instalado. Instalando...
+    pip install pymysql
+)
+
+
 REM Starta o broker Mosquitto
 net start mosquitto
+pip install pymysql

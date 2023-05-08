@@ -2,9 +2,9 @@ import paho.mqtt.client as mqtt
 import time 
 import json
 import pymysql
+import datetime
 
-
-
+#A tabela do BD está no diretório BD no arquivo api_Energy_monitor.sql
 
 #COnfigurações do Banco
 host_banco="localhost"
@@ -14,7 +14,7 @@ db_nome_banco="energy_monitor"
 porta_banco = 3306
 tempo_espera_insert=1#provavelmente não será usado nesse código pois o insert será feito a cada iteração com o broker
 
-operacao_insert= "INSERT INTO dispositivos(corrente,aparelho,qos) VALUES(%s, %s, %s)"#Não altere muito aqui, mas se alterar, verifique o laço for com os dados do json
+operacao_insert= "INSERT INTO sensor(corrente,MAC,qos,data_hora_medicao) VALUES(%s, %s, %s,%s)"#Não altere muito aqui, mas se alterar, verifique o laço for com os dados do json
 
   
 #some comments are writted in portuguese. If you want to know about, you can use the google tradutor :p 
@@ -55,14 +55,17 @@ def on_message(client, userdata, msg):
     print("=============================") 
     print("Topic: "+str(msg.topic) )
     print("Payload: "+str(msg.payload)) 
+    print("Hora:"+datetime.datetime.now().strftime("%H:%M:%S"))
     print("=============================") 
     
     for i in range(len(TOPIC)):
         if((msg.topic,msg.qos)==TOPIC[i]):
+            now = datetime.datetime.now() #variavel que guarda o horario atual
             mensagem={  
                 'mensagem': int(msg.payload),
                 'topico': str(msg.topic),
-                'qos': str(msg.qos)#Caso queira salvar como um inteiro você digita: 
+                'qos': str(msg.qos),#Caso queira salvar como um inteiro você digita: 
+                'horario':now.isoformat()#guarda o horario no json
                 };
             
             #parte dentro do laço que poderemos fazer o insert
@@ -73,26 +76,27 @@ def on_message(client, userdata, msg):
             mensagemBanco= int(msg.payload)
             topicoBanco= str(msg.topic)
             qosBanco= str(msg.qos)
+            horario_formatado=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')#formata o horario para esse formato para inserir no BD
             
             #insert no BD
-            cursor.execute(operacao_insert,(mensagemBanco,topicoBanco,qosBanco))
+            cursor.execute(operacao_insert,(mensagemBanco,topicoBanco,qosBanco,horario_formatado))
             
             #confirmar a inserção
             conexao.commit()
             
             
-            with open(f'../FRONT/grafico/src/{msg.topic}.json','w') as f:
+            with open(f'../FRONT/grafico/src/public{msg.topic}.json','w') as f:
                 pass
-            with open(f'../FRONT/grafico/src/{msg.topic}.json','r') as f:
+            with open(f'../FRONT/grafico/src/public{msg.topic}.json','r') as f:
                 conteudo_json=f.read()
                 if not conteudo_json:
-                    with open(f'../FRONT/grafico/src/{msg.topic}.json','w') as s:
+                    with open(f'../FRONT/grafico/src/public{msg.topic}.json','w') as s:
                         json.dump([],s)
-            with open(f'../FRONT/grafico/src/{msg.topic}.json','r') as f:
+            with open(f'../FRONT/grafico/src/public{msg.topic}.json','r') as f:
                 guardando_json=json.load(f)
                 
             guardando_json.append(mensagem)
-            with open(f'../FRONT/grafico/src/{msg.topic}.json','w') as f:
+            with open(f'../FRONT/grafico/src/public{msg.topic}.json','w') as f:
                 json.dump(guardando_json,f)
 
 
@@ -138,3 +142,5 @@ except KeyboardInterrupt:
     print("\nConexão com o banco encerrada e programa fechado com sucesso\n")
     client.disconnect() 
     client.loop_stop 
+    
+    

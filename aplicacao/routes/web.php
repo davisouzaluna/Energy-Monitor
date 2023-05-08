@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SensorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
+});*/
+
+Route::get('/',function() {
+    return view('inicio');
 });
+
+Route::get('/sensor10', [SensorController::class, 'ultimosDez'])->name('sensor.ultimos-dez');
+Route::get('/atualiza-dados',[SensorController::class, 'atualizaDados']);

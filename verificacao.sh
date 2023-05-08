@@ -37,5 +37,12 @@ then
     sudo apt-get install mosquitto-clients -y
 fi
 
+# Checa se o pacote pymysql está instalado
+if ! python -c "import pymysql" &> /dev/null # O comando descarta a saída padrão quando true, não imprimindo nada na tela se for false.
+then
+    echo "pymysql não está instalado. Instalando..."
+    sudo pip install pymysql
+fi
+
 # Starta o broker Mosquitto
 sudo service mosquitto start
