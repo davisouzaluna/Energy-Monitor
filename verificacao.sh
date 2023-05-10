@@ -44,5 +44,6 @@ then
     sudo pip install pymysql
 fi
 
+
 # Starta o broker Mosquitto
 sudo service mosquitto start

@@ -3,6 +3,9 @@ import time
 import json
 import pymysql
 import datetime
+import os
+
+
 
 #A tabela do BD está no diretório BD no arquivo api_Energy_monitor.sql
 
@@ -50,12 +53,14 @@ Connected = False #Variável global utilizada como referência para saber se o s
 #Conexão com o banco
 #A conexão está sendo feita fora da funçao para poder ser tratada no trycatch do final do código
 conexao = pymysql.connect(host=host_banco,port=porta_banco, user=user_banco, passwd=passwd_banco, db=db_nome_banco)
+cursor = conexao.cursor() #cursor agora é uma variável global
 
 def on_message(client, userdata, msg):
+    
     print("=============================") 
     print("Topic: "+str(msg.topic) )
     print("Payload: "+str(msg.payload)) 
-    print("Hora:"+datetime.datetime.now().strftime("%H:%M:%S"))
+    print("Hora:"+datetime.datetime.now(datetime.timezone.utc).strftime("%H:%M:%S"))
     print("=============================") 
     
     for i in range(len(TOPIC)):
@@ -70,13 +75,13 @@ def on_message(client, userdata, msg):
             
             #parte dentro do laço que poderemos fazer o insert
             
-            cursor = conexao.cursor()
+            
             
             #transformando o tipo dos dados e guardando em outras variáveis
             mensagemBanco= int(msg.payload)
             topicoBanco= str(msg.topic)
             qosBanco= str(msg.qos)
-            horario_formatado=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')#formata o horario para esse formato para inserir no BD
+            horario_formatado=datetime.datetime.now(datetime.timezone.utc)#formata o horario para esse formato para inserir no BD
             
             #insert no BD
             cursor.execute(operacao_insert,(mensagemBanco,topicoBanco,qosBanco,horario_formatado))
@@ -85,19 +90,38 @@ def on_message(client, userdata, msg):
             conexao.commit()
             
             
-            with open(f'../FRONT/grafico/src/public{msg.topic}.json','w') as f:
-                pass
-            with open(f'../FRONT/grafico/src/public{msg.topic}.json','r') as f:
-                conteudo_json=f.read()
-                if not conteudo_json:
-                    with open(f'../FRONT/grafico/src/public{msg.topic}.json','w') as s:
-                        json.dump([],s)
-            with open(f'../FRONT/grafico/src/public{msg.topic}.json','r') as f:
-                guardando_json=json.load(f)
+           # with open(f'../FRONT/grafico/src/public{msg.topic}.json','w') as f:
+            #    pass
+            #with open(f'../FRONT/grafico/src/public{msg.topic}.json','r') as f:
+             #   conteudo_json=f.read()
+              #  if not conteudo_json:
+               #     with open(f'../FRONT/grafico/src/public{msg.topic}.json','w') as s:
+                #        json.dump([],s)
+            #with open(f'../FRONT/grafico/src/public{msg.topic}.json','r') as f:
+             #   guardando_json=json.load(f)
                 
-            guardando_json.append(mensagem)
-            with open(f'../FRONT/grafico/src/public{msg.topic}.json','w') as f:
-                json.dump(guardando_json,f)
+            #guardando_json.append(mensagem)
+            #with open(f'../FRONT/grafico/src/public{msg.topic}.json','w') as f:
+             #   json.dump(guardando_json,f)
+            json_temporario=[mensagem]
+            nome_do_arquivo=f'../FRONT/grafico/public/{msg.topic}.json'
+            def criacao_arquivo_se_nao_existe(nome_do_arquivo,mensagem):
+                if os.path.exists(nome_do_arquivo):
+                    with open(nome_do_arquivo,'r') as f:
+                        arquivo = json.load(f)
+                        arquivo.append(mensagem)
+                else:
+                    arquivo = []
+                    arquivo.extend(mensagem)
+                    
+                       
+                with open(nome_do_arquivo,'w') as arquivos_json:
+                    json.dump(arquivo,arquivos_json,indent=4)
+            criacao_arquivo_se_nao_existe(nome_do_arquivo,mensagem)           
+            
+            
+            
+             
 
 
 
