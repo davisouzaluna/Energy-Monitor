@@ -1,38 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from 'react';
+import LineChart from './components/LineChartComponent';
 
-interface DadoJSON {
-  mensagem: number;
-  topico: string;
-  qos: string;
-}
-
-export default function App() {
-  const [data, setData] = useState<DadoJSON[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch("./microondas.json");
-      const jsonDados = await response.json();
-      setData(jsonDados);
-    };
-
-    fetchData();
-
-    const intervalId = setInterval(fetchData, 2000);
-
-    return () => clearInterval(intervalId);
-  }, []);
-
+const App: React.FC = () => {
   return (
-    <div>
-      <h1>Dados:</h1>
-      {data.map((item) => (
-        <div key={item.topico}>
-          <p>Topico: {item.topico}</p>
-          <p>Mensagem: {item.mensagem}</p>
-          <p>QoS: {item.qos}</p>
-        </div>
-      ))}
+    <div className="App">
+      <LineChart />
     </div>
   );
-}
+};
+
+export default App;
