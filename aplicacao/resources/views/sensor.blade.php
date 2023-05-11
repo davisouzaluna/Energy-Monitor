@@ -2,17 +2,19 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Últimos 10 Valores</div>
+    <div class="row justify-content-center align-items-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">Últimos 10 Valores</div>
+            <div class="card-body d-flex align-items-center justify-content-center">
+            <canvas id="grafico" width="15" height="5"></canvas>
 
-                    <div class="card-body">
-                        <canvas id="grafico"></canvas>
-                    </div>
-                </div>
+
             </div>
         </div>
+    </div>
+</div>
+
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
@@ -34,8 +36,8 @@
                             {{ $sensor->corrente }},
                         @endforeach
                     ],
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255,99,132,1)',
+                    backgroundColor: 'rgba(57, 106, 233, 0.2)',
+                    borderColor: 'rgba(4,52,176,1)',
                     borderWidth: 1
                 }]
             },
