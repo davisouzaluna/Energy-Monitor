@@ -8,8 +8,8 @@ NOME_ARQUIVO=[('microondas.json')]#tupla com os nomes dos tópicos
 caminho_do_diretorio = '../IOT'
 #configurações do banco                                             
 host_banco="localhost"
-user_banco="root"
-passwd_banco="root"
+user_banco="aline"
+passwd_banco="aline123"
 db_nome_banco="energy_monitor"
 porta_banco = 3306
 tempo_espera_insert=1

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LogErroController;
 use App\Http\Controllers\SensorController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +25,4 @@ Route::get('/',function() {
 
 Route::get('/sensor10', [SensorController::class, 'ultimosDez'])->name('sensor.ultimos-dez');
 Route::get('/atualiza-dados',[SensorController::class, 'atualizaDados']);
+Route::get('/log_erro', [LogErroController::class, 'index']);
