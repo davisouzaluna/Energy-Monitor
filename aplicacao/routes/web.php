@@ -31,7 +31,7 @@ Route::delete('/device/{id}',[DeviceController::class,'destroy'])->name('device.
 Route::get('/device', [DeviceController::class, 'index'])->name('device.index');
 Route::get('/criar/dispositivo', [DeviceController::class, 'create'])->name('device.create');
 Route::post('/device/salvar', [DeviceController::class, 'store'])->name('device.store');
-Route::put('/device/editar', [DeviceController::class, 'store'])->name('device.store');
+//Route::put('/device/editar', [DeviceController::class, 'store'])->name('device.store');
 Route::get('/device/{id}/edit',[DeviceController::class,'edit'])->name('device.edit');
 Route::put('/device/{id}', [DeviceController::class,'update'])->name('device.update');
 

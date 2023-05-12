@@ -1,4 +1,5 @@
 
+
 <form method="POST" action="{{ route('device.update',$dispositivo->id) }}">
     @csrf
     @method('PUT')
