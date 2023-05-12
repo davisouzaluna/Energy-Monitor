@@ -4,21 +4,17 @@
         <title>@yield('title')</title>
     </head>
     <body>
-        <header>
-            <nav>
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/contato">Contato</a></li>
-                </ul>
-            </nav>
-        </header>
-        
+
+        @include('layouts._partials.header')
+
+
         <main>
             @yield('content')
         </main>
-        
-        <footer>
-            <p>&copy; 2023 - Todos os direitos reservados</p>
-        </footer>
+
+
+        @include('layouts._partials.footer')
+
+
     </body>
 </html>
