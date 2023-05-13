@@ -1,5 +1,5 @@
 
-<a href="{{ route('principal.index') }}">Voltar</a>  |
+<a href="{{ route('dashboard') }}">Voltar</a>  |
 
 <a href="{{ route('device.create') }}">Criar Dispositivo</a>
 
