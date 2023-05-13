@@ -13,7 +13,7 @@
         {{ __("Bem-vindo(a) ao Sistema Monitoramento de Corrente") }} <br><br>
 
         {{ __("Para visualizar o gráfico com os últimos 10 valores medidos, clique no botão abaixo: ")}} <br><br>
-        <a href="{{ route('sensor.todos') }}" class="inline-block px-6 py-3 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition-colors">Visualizar Gráfico</a>
+        <a href="{{ route('sensor.ultimos-dez') }}" class="inline-block px-6 py-3 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition-colors">Visualizar Gráfico</a>
 
 
 

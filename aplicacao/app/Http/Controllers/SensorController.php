@@ -34,7 +34,7 @@ class SensorController extends Controller
 });
 $valores = $sensores->pluck('corrente');
 
-return view('sensor', compact('labels', 'valores','sensores'));
+return view('sensor.sensor', compact('labels', 'valores','sensores'));
 
 }
 
