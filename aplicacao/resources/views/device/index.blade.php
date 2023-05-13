@@ -1,4 +1,9 @@
 
+@extends('layouts.ppa') 
+
+@section('content')
+
+
 <a href="{{ route('dashboard') }}">Voltar</a>  |
 
 <a href="{{ route('device.create') }}">Criar Dispositivo</a>
@@ -37,3 +42,4 @@
         @endforeach
     </tbody>
 </table>
+@endsection

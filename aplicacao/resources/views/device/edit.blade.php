@@ -1,3 +1,6 @@
+@extends('layouts.ppa') 
+
+@section('content')
 
 
 <form method="POST" action="{{ route('device.update',$dispositivo->id) }}">
@@ -22,3 +25,4 @@
 
     <button type="submit">Enviar</button>
 </form>
+@endsection

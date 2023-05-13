@@ -1,4 +1,6 @@
+@extends('layouts.ppa') 
 
+@section('content')
 
 
 <form method="POST" action="{{ route('device.store') }}">
@@ -22,3 +24,4 @@
 
     <button type="submit">Enviar</button>
 </form>
+@endsection
