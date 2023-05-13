@@ -1,5 +1,7 @@
 <?php
 
+
+use App\Http\Controllers\LogErroController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\SensorController;
 use App\Http\Controllers\ProfileController;
@@ -41,6 +43,8 @@ require __DIR__.'/auth.php';
 
 Route::get('/sensor10', [SensorController::class, 'ultimosDez'])->name('sensor.ultimos-dez');
 Route::get('/atualiza-dados',[SensorController::class, 'atualizaDados']);
+Route::get('/log_erro', [LogErroController::class, 'index']);
+
 
 
 Route::delete('/device/{id}',[DeviceController::class,'destroy'])->name('device.destroy');
@@ -49,6 +53,7 @@ Route::get('/criar/dispositivo', [DeviceController::class, 'create'])->name('dev
 Route::post('/device/salvar', [DeviceController::class, 'store'])->name('device.store');
 Route::get('/device/{id}/edit',[DeviceController::class,'edit'])->name('device.edit');
 Route::put('/device/{id}', [DeviceController::class,'update'])->name('device.update');
+
 
 
 

@@ -1,0 +1,11 @@
+{
+    "name": "aline/energy-monitor",
+    "autoload": {
+        "psr-4": {
+            "Aline\\EnergyMonitor\\": "src/"
+        }
+    },
+    "require": {
+        "laravel/framework": "^10.10"
+    }
+}
