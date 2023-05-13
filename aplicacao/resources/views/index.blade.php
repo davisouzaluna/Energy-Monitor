@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.ppa')
 
 @section('titulo', 'Dashboard')
 

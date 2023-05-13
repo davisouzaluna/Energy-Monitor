@@ -43,7 +43,7 @@ require __DIR__.'/auth.php';
 
 Route::get('/sensor10', [SensorController::class, 'ultimosDez'])->name('sensor.ultimos-dez');
 Route::get('/atualiza-dados',[SensorController::class, 'atualizaDados']);
-Route::get('/log_erro', [LogErroController::class, 'index']);
+Route::get('/log_erro', [LogErroController::class, 'index'])->name('log.erro');
 
 
 

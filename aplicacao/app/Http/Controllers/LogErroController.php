@@ -18,6 +18,6 @@ class LogErroController extends Controller
     {
         $log = LogErro::findOrFail($id);
 
-        return view('LogErro.show', compact('log'));
+        return view('LogErro', compact('log'));
     }
 }
