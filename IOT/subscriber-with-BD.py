@@ -33,7 +33,7 @@ TOPIC=[("microondas",0)]#tupla com tópico e QoS. Pode-se adicionar diversos tó
 #Só para relembrar: QoS=0 significa que a entrega da mensagem será feita com o melhor esforço, sendo assim adicionada à fila do broker e não tendo a confirmação que o subscriber irá receber a mensagem. Resumindo, a mensagem não é armazenada 
 #QoS=1 significa que há uma garantia de que pelo menos uma vez a mensagem irá ser entregue ao receptor 
 #QoS=2 significa que a mensagem irá ser recebida apenas uma vez pelo receptor(é mais lento, mas mais confiável) 
- 
+
   
 def on_connect(client, userdata, flags, rc): 
      

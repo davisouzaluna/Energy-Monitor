@@ -15,5 +15,6 @@ class LogErro extends Model
         'tipo',
         'mensagem',
         'data_hora',
+        'log_erro_sensor_correspondente',
     ];
 }
