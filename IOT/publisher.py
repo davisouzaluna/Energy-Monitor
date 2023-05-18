@@ -7,7 +7,7 @@ PORT=1883
 KEEPALIVE=60 
 TOPIC="microondas" 
 inicio_random=0#valor aleatório inicial 
-fim_random=30#valor aleatório limite. Referente à amperagem
+fim_random=50#valor aleatório limite. Referente à amperagem
 time_sleep_pub=1#Referente à amperagem
   
 #Publisher 

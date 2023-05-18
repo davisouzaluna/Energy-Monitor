@@ -20,7 +20,6 @@ CREATE TABLE log_erro (
   tipo VARCHAR(255) NOT NULL,
   mensagem TEXT NOT NULL,
   data_hora DATETIME NOT NULL,
-  log_erro_sensor int not null,
-  PRIMARY KEY (id),
-  FOREIGN KEY (log_erro_sensor) references sensor(id)
+  log_erro_sensor_correspondente VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id)
 );

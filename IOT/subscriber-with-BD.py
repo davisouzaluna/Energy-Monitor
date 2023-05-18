@@ -12,13 +12,15 @@ import os
 #COnfigurações do Banco
 host_banco="localhost"
 user_banco="root"
-passwd_banco="rootroot"
+passwd_banco="root"
 db_nome_banco="energy_monitor"
 porta_banco = 3306
 tempo_espera_insert=1#provavelmente não será usado nesse código pois o insert será feito a cada iteração com o broker
 
-operacao_insert= "INSERT INTO sensor(corrente,MAC,qos,data_hora_medicao) VALUES(%s, %s, %s,%s)"#Não altere muito aqui, mas se alterar, verifique o laço for com os dados do json
+valorLimiteLogErro=40
 
+operacao_insert= "INSERT INTO sensor(corrente,MAC,qos,data_hora_medicao) VALUES(%s, %s, %s,%s)"#Não altere muito aqui, mas se alterar, verifique o laço for com os dados do json
+operacaoInsertLogErro = "INSERT INTO log_erro(mensagem,log_erro_sensor_correspondente,data_hora,tipo) VALUES(%s,%s,%s,%s)"
   
 #some comments are writted in portuguese. If you want to know about, you can use the google tradutor :p 
  
@@ -55,6 +57,22 @@ Connected = False #Variável global utilizada como referência para saber se o s
 conexao = pymysql.connect(host=host_banco,port=porta_banco, user=user_banco, passwd=passwd_banco, db=db_nome_banco)
 cursor = conexao.cursor() #cursor agora é uma variável global
 
+
+
+#=========================================================================================================================
+#verificação do tipo de erro(varchar)
+def tipoErro(valorSensor):
+    if valorSensor > 40:
+        return "Amperagem muito acima"
+
+#log de erro(insert na tabela)
+def insertLogErro(valor,sensorCorrespondente,horarioAtual,tipoErro):
+    operacaoInsertLogErro
+    cursor.execute(operacaoInsertLogErro,(valor,sensorCorrespondente,horarioAtual,tipoErro))
+    conexao.commit()
+ 
+#========================================================================================================================   
+
 def on_message(client, userdata, msg):
     
     print("=============================") 
@@ -75,6 +93,13 @@ def on_message(client, userdata, msg):
             
             #parte dentro do laço que poderemos fazer o insert
             
+            #insert logErro
+            if(int(msg.payload) >valorLimiteLogErro):#msg payload foi colocado em inteiro, deve ser alterado depois
+                valor = int(msg.payload)
+                sensorCorrespondente = str(msg.topic)
+                horarioAtual = datetime.datetime.now(datetime.timezone.utc)
+                
+                insertLogErro(valor,sensorCorrespondente,horarioAtual,tipoErro(valor))
             
             
             #transformando o tipo dos dados e guardando em outras variáveis
