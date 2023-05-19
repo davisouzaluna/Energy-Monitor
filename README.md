@@ -1,6 +1,6 @@
 <p align="center">
 <a href="#">
-<img src="./aplicacao/public/img/Logo.png" height="150" width="175" alt="Logo Energy Monitor" />
+<img src="/img/Logo.png" height="150" width="175" alt="Logo Energy Monitor" />
 </a>
 </p>
 
