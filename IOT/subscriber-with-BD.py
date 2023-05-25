@@ -73,6 +73,26 @@ def insertLogErro(valor,sensorCorrespondente,horarioAtual,tipoErro):
  
 #========================================================================================================================   
 
+#Status do sensor
+def status_sensor_json_banco(DISPOSITIVO_TOPICO, DENTRO_OU_FORA_DA_FUNCAO, EH_JSON):
+    status = 1 if DENTRO_OU_FORA_DA_FUNCAO.lower() == "dentro" else 0
+
+    # Verificar se o registro já existe
+    select_query = "SELECT * FROM status WHERE DISPOSITIVO_TOPICO = %s"
+    cursor.execute(select_query, (DISPOSITIVO_TOPICO,))
+    existing_record = cursor.fetchone()
+
+    if existing_record is None:
+        # O registro não existe, realizar a inserção
+        insert_query = "INSERT INTO status(status_sensor, DISPOSITIVO_TOPICO) VALUES (%s, %s)"
+        cursor.execute(insert_query, (status, DISPOSITIVO_TOPICO))
+        conexao.commit()
+    else:
+        # O registro já existe, realizar o update
+        update_query = "UPDATE status SET status_sensor = %s WHERE DISPOSITIVO_TOPICO = %s"
+        cursor.execute(update_query, (status, DISPOSITIVO_TOPICO))
+        conexao.commit()
+
 def on_message(client, userdata, msg):
     
     print("=============================") 
@@ -88,7 +108,8 @@ def on_message(client, userdata, msg):
                 'mensagem': int(msg.payload),
                 'topico': str(msg.topic),
                 'qos': str(msg.qos),#Caso queira salvar como um inteiro você digita: 
-                'horario':now.isoformat()#guarda o horario no json
+                'horario':now.isoformat(),#guarda o horario no json
+                'status': status_sensor_json_banco(msg.topic,"Dentro",True)
                 };
             
             #parte dentro do laço que poderemos fazer o insert
@@ -107,6 +128,8 @@ def on_message(client, userdata, msg):
             topicoBanco= str(msg.topic)
             qosBanco= str(msg.qos)
             horario_formatado=datetime.datetime.now(datetime.timezone.utc)#formata o horario para esse formato para inserir no BD
+            
+            status_sensor_json_banco(str(msg.topic),"Dentro",False)
             
             #insert no BD
             cursor.execute(operacao_insert,(mensagemBanco,topicoBanco,qosBanco,horario_formatado))
