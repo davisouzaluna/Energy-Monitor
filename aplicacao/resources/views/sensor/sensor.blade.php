@@ -27,14 +27,14 @@
             type: 'line',
             data: {
                 labels: [
-                    @foreach($sensores as $sensor)
+                    @foreach($sensores->reverse() as $sensor)
                         '{{ $sensor->data_hora_medicao }}',
                     @endforeach
                 ],
                 datasets: [{
                     label: 'Valores',
                     data: [
-                        @foreach($sensores as $sensor)
+                        @foreach($sensores->reverse() as $sensor)
                             {{ $sensor->corrente }},
                         @endforeach
                     ],
@@ -63,8 +63,8 @@
             fetch('/atualiza-dados')
   .then(response => response.json())
   .then(data => {
-    myChart.data.labels = data.labels;
-    myChart.data.datasets[0].data = data.data;
+    myChart.data.labels = data.labels.reverse();
+    myChart.data.datasets[0].data = data.data.reverse();
 
     myChart.update();
   });
