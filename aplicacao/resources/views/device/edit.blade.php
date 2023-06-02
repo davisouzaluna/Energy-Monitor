@@ -1,4 +1,5 @@
-@extends('layouts.ppa') 
+@extends('layouts.ppa')
+
 
 @section('content')
 
