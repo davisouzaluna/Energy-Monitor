@@ -1,6 +1,6 @@
 @extends('layouts.ppa')
 
-@section('titulo', 'Dashboard')
+@section('title', 'Dashboard')
 
 @section('content')
     <div class="container">
