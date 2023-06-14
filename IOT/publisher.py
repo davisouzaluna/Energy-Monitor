@@ -5,7 +5,7 @@ import random
 BROKER="test.mosquitto.org" #O broker público é test.mosquitto.org
 PORT=1883 
 KEEPALIVE=60 
-TOPIC="microondas" 
+TOPIC="111111111111" 
 inicio_random=0#valor aleatório inicial 
 fim_random=50#valor aleatório limite. Referente à amperagem
 time_sleep_pub=1#Referente à amperagem

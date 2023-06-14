@@ -26,4 +26,11 @@
 
     <button type="submit">Enviar</button>
 </form>
+
+<form action="{{ route('dashboard') }}" method="GET" style="display: inline;">
+    @csrf
+    <button type="submit" class="btn btn-success">{{ 'dashboard' }}</button>
+</form>
+
+
 @endsection

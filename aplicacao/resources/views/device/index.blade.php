@@ -6,7 +6,14 @@
 
 <a href="{{ route('dashboard') }}">Voltar</a>  |
 
-<a href="{{ route('device.create') }}">Criar Dispositivo</a>
+<a href="{{ route('device.create') }}">Criar Dispositivo</a> |
+
+<form action="{{ route('dashboard') }}" method="GET" style="display: inline;">
+    @csrf
+    <button type="submit" class="btn btn-success">{{ 'dashboard' }}</button>
+</form>
+
+
 
 
 
