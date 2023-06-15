@@ -31,7 +31,7 @@
 
           <li>
             <a
-              href="https://github.com/davifurao/Energy-Monitor"
+              href="/"
               rel="noreferrer"
               target="_blank"
               class="text-gray-700 transition hover:opacity-75"

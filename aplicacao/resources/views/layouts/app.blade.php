@@ -36,12 +36,12 @@
 
     <body>
 
-        {{--@include('layouts._partials.header')
+        @include('layouts._partials.header')
 
 
         <main>
             @yield('content')
-        </main>--}}
+        </main>
 
 
         @include('layouts._partials.footer')

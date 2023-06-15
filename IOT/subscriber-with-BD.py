@@ -11,8 +11,8 @@ import os
 
 #COnfigurações do Banco
 host_banco="localhost"
-user_banco="pam"
-passwd_banco="123"
+user_banco="root"
+passwd_banco="root"
 db_nome_banco="energy_monitor"
 porta_banco = 3306
 tempo_espera_insert=1#provavelmente não será usado nesse código pois o insert será feito a cada iteração com o broker
