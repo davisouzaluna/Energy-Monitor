@@ -32,7 +32,7 @@
                         {{-- <small>O MAC deve conter exatamente 12 caracteres alfanuméricos (A-F, a-f, 0-9).</small> --}}
                     </div>
                     
-                    <div class="flex justify-end ">
+                    <div class="flex justify-center ">
                     <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md">Enviar</button>
                     </div>
 

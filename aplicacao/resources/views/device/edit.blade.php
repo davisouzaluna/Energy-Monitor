@@ -4,6 +4,11 @@
 <x-app-layout>
 
     <style>
+
+    .chart-container {
+         width: 70%; /* Defina o valor desejado para a largura */
+        height: 50%; /* Defina o valor desejado para a altura */
+        }
         .chart-canvas {
             width: 400px; /* Largura desejada */
             height: 300px; /* Altura desejada */
@@ -46,7 +51,7 @@
                                 {{-- <small>O MAC deve conter exatamente 12 caracteres alfanuméricos (A-F, a-f, 0-9).</small> --}}
                             </div>
 
-                            <div class="flex justify-end ">
+                            <div class="flex justify-center">
                                 <button type="submit"
                                     class="px-4 py-2 bg-blue-500 text-white rounded-md">Alterar</button>
                             </div>
@@ -66,10 +71,13 @@
 
     
 
+    <div class="py-1 flex justify-center items-center mb-4">
 
-    <div id="chart-container" class="py-1 flex justify-center mb-4">
-        <canvas id="myChart" class="chart-canvas"></canvas>
+        <div id="chart-container" class="chart-container">
+            <canvas id="myChart" class="chart-canvas"></canvas>
+        </div>
     </div>
+    
     
 
     
@@ -122,7 +130,7 @@
                                     display: true,
                                     title: {
                                         display: true,
-                                        //text: 'Valores da Corrente'
+                                        text: 'Valores da Corrente'
                                     }
                                 }
                             }
