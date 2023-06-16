@@ -4,17 +4,21 @@
 <x-app-layout>
 
     <style>
-
-    .chart-container {
-         width: 70%; /* Defina o valor desejado para a largura */
-        height: 50%; /* Defina o valor desejado para a altura */
+        .chart-container {
+            width: 70%;
+            /* Defina o valor desejado para a largura */
+            height: 50%;
+            /* Defina o valor desejado para a altura */
         }
+
         .chart-canvas {
-            width: 400px; /* Largura desejada */
-            height: 300px; /* Altura desejada */
+            width: 400px;
+            /* Largura desejada */
+            height: 300px;
+            /* Altura desejada */
         }
     </style>
-    
+
 
 
     <div class="py-1 flex justify-center">
@@ -69,21 +73,24 @@
         </form>
     </div>
 
-    
+
+
+    <div class="flex flex-col items-center">
+        <h1 class="text-lg font-semibold mb-2">Últimas 10 medições</h1>
+    </div>
 
     <div class="py-1 flex justify-center items-center mb-4">
-
         <div id="chart-container" class="chart-container">
             <canvas id="myChart" class="chart-canvas"></canvas>
         </div>
     </div>
-    
-    
-
-    
 
 
-    
+
+
+
+
+
 
 
     {{-- <small>Código do grafico</small> --}}
@@ -95,7 +102,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const mac = "{{ $dispositivo->MAC }}";
 
             fetch(`/sensor/ultimosDez/${encodeURIComponent(mac)}`)
@@ -145,13 +152,15 @@
 
 
 
-<div div class="py-1 flex justify-center">
-    <form action="{{ route('device.destroy', $dispositivo->id) }}" method="post">
-        @csrf
-        @method('delete')
-        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded">Excluir dispositivo</button>
-    </form>
-</div>
+    <div div class="py-1 flex justify-center">
+        <form action="{{ route('device.destroy', $dispositivo->id) }}" method="post">
+            @csrf
+            @method('delete')
+            <button type="submit"
+                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded">Excluir
+                dispositivo</button>
+        </form>
+    </div>
 
 
 </x-app-layout>
