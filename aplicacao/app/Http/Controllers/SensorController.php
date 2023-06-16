@@ -26,17 +26,28 @@ class SensorController extends Controller
         ]);
     }
 
-    public function ultimosDez()
-{
-    $sensores = Sensor::orderBy('id', 'desc')->limit(10)->get();
-    $labels = $sensores->pluck('data_hora_medicao')->map(function ($item) {
-    return Carbon::createFromFormat('Y-m-d H:i:s', $item)->format('d/m/Y H:i:s');
-});
-$valores = $sensores->pluck('corrente');
+  public function ultimosDez($topico)
+    {
+        // Supondo que você tenha um modelo chamado Sensor para acessar os dados do banco de dados
 
-return view('sensor.sensor', compact('labels', 'valores','sensores'));
+        // Obtém os últimos 10 sensores do tópico especificado, ordenados pelo ID em ordem descendente
+        $sensores = Sensor::where('MAC', $topico)->orderBy('id', 'desc')->limit(10)->get();
 
-}
+        // Mapeia as datas e horas de medição no formato desejado (d/m/Y H:i:s)
+        $labels = $sensores->pluck('data_hora_medicao')->map(function ($item) {
+            return Carbon::createFromFormat('Y-m-d H:i:s', $item)->format('d/m/Y H:i:s');
+        });
+
+        // Obtém os valores da corrente dos sensores
+        $valores = $sensores->pluck('corrente');
+
+        // Retorna os dados em formato JSON
+        return response()->json([
+            'labels' => $labels,
+            'valores' => $valores,
+            'sensores' => $sensores
+        ]);
+    }
 
 public function atualizaDados(){
     $sensores = Sensor::orderBy('data_hora_medicao', 'desc')->limit(10)->get();

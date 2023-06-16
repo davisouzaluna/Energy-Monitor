@@ -41,7 +41,7 @@ require __DIR__.'/auth.php';
 
 
 
-Route::get('/sensor10', [SensorController::class, 'ultimosDez'])->name('sensor.ultimos-dez');
+//Route::get('/sensor10', [SensorController::class, 'ultimosDez'])->name('sensor.ultimos-dez');
 Route::get('/atualiza-dados',[SensorController::class, 'atualizaDados']);
 Route::get('/log_erro_geral', [LogErroController::class, 'index'])->name('log.erro');
 
@@ -56,6 +56,9 @@ Route::post('/device/salvar', [DeviceController::class, 'store'])->name('device.
 Route::get('/device/{id}/edit',[DeviceController::class,'edit'])->name('device.edit');
 Route::put('/device/{id}', [DeviceController::class,'update'])->name('device.update');
 
+//caso eu queira criar um controller que faça o redirecionamento correto
+//Route::put('/device/{id}', [DeviceController::class,'update-dashboard'])->name('device.update-dashboard');
+Route::get('/sensor/ultimosDez/{topico}', [SensorController::class, 'ultimosDez'])->name('sensor.ultimosDez');
 
 Route::get('/status/fetch', [StatusController::class, 'fetchStatus'])->name('status.fetch');
 

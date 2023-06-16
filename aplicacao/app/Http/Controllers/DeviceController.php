@@ -36,7 +36,7 @@ class DeviceController extends Controller
         $register = Device::create($data);
 
         //return redirect()->back();
-        return redirect()->route('device.index')->with('success', 'Dispositivo cadastrado com sucesso!');
+        return redirect()->route('dashboard')->with('success', 'Dispositivo cadastrado com sucesso!');
     }
 
     /**
@@ -65,7 +65,9 @@ class DeviceController extends Controller
 
         $dispositivo->update($request->all());
 
-        return redirect()->route('device.index', $id)->with('success', 'Dispositivo atualizados com sucesso!');
+        return redirect()->route('device.edit', $id)->with('success', 'Dispositivo atualizado com sucesso!');
+
+        //return redirect()->route('device.index', $id)->with('success', 'Dispositivo atualizados com sucesso!');
     }
 
     /**
