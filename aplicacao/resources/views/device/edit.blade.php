@@ -31,6 +31,11 @@
     @csrf
     <button type="submit" class="btn btn-success">{{ 'dashboard' }}</button>
 </form>
+<form action="{{ route('device.destroy',$dispositivo->id) }}" method="post">
+    @csrf
+    @method('delete')
+    <button type="submit">Excluir</button>
+</form>
 
 
 @endsection

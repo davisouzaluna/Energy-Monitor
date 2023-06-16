@@ -76,6 +76,7 @@ class DeviceController extends Controller
         $device = Device::find($id);
         $device->delete();
 
-       return redirect()->route('device.index');
+       /*return redirect()->route('device.index');*/
+       return redirect()->route('dashboard');
     }
 }
