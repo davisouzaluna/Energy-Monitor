@@ -49,16 +49,8 @@
           <br><br>
           <h3>Dispositivos cadastrados:</h3>
          <div class="grid grid-cols-3 gap-4">
-    <a href="pagina1.html" class="bg-white shadow rounded-lg">
-        <img src="caminho/para/imagem1.jpg" alt="Imagem 1" class="w-full h-full object-cover">
-    </a>
-    <a href="pagina2.html" class="bg-white shadow rounded-lg">
-        <img src="caminho/para/imagem2.jpg" alt="Imagem 2" class="w-full h-full object-cover">
-    </a>
-    <a href="pagina3.html" class="bg-white shadow rounded-lg">
-        <img src="caminho/para/imagem3.jpg" alt="Imagem 3" class="w-full h-full object-cover">
-    </a>
-            <!-- Adicione mais cards de imagens aqui, se necessário -->
+    
+            
         </div>
         
         
@@ -77,11 +69,26 @@
                       @endif
           
                       <td>
-                          <form action="{{ route('device.edit', $dispositivo->id) }}" method="GET" style="display: inline;" >
-                              @csrf
-                              <button type="submit" class="btn btn-success">{{ $dispositivo->nome }}</button>
-                          </form>
-                      </td>
+                        <form action="{{ route('device.edit', $dispositivo->id) }}" method="GET" style="display: inline;">
+                            @csrf
+                            <div class="flex items-center">
+                                <button type="submit" class="btn btn-success">
+                                    <div class="flex items-center">
+                                        <img src="/img/eletrodomestico.png" alt="Imagem do dispositivo" width="100" height="100"
+                                            style="max-width: 80px; height: auto;">
+                                        <span class="ml-2">{{ $dispositivo->nome }}</span>
+                                    </div>
+                                </button>
+                            </div>
+                        </form>
+                    </td>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
           
                       @php
                           $colCount++;
