@@ -6,10 +6,10 @@
         <ul class="nav-menu">
             <li><a href="{{ route('login') }}">Entrar</a></li>
             <li><a href="{{ route('register') }}">Cadastrar</a></li>
-            @auth
+           {{--@auth
             <li><a href="/dashboard">Home</a></li>
             <li><a href="/contato">Contato</a></li>
-            @endauth
+            @endauth--}} 
         </ul>
     </nav>
 </header>

@@ -7,21 +7,16 @@
       >
         <nav aria-label="Footer Navigation - Support">
           <ul class="flex flex-wrap justify-center gap-4 text-xs lg:justify-end">
+
             <li>
               <a href="#" class="text-blue-700 transition hover:opacity-75">
-                Terms & Conditions
+                Sobre o Projeto
               </a>
             </li>
 
             <li>
               <a href="#" class="text-blue-700 transition hover:opacity-75">
-                Privacy Policy
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="text-blue-700 transition hover:opacity-75">
-                Cookies
+                Contatos
               </a>
             </li>
           </ul>
