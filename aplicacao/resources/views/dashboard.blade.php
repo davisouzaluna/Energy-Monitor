@@ -20,8 +20,8 @@
         <x-device-table :dispositivos="$dispositivos" />
         <x-create-device/>
     @endif
-    
-   
+
+
    
 
     

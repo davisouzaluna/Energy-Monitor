@@ -57,7 +57,7 @@
 
                             <div class="flex justify-center">
                                 <button type="submit"
-                                    class="px-4 py-2 bg-blue-500 text-white rounded-md">Alterar</button>
+                                    class="px-4 py-2  bg-blue-500 text-white rounded-md transition ease-in-out delay-100 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-200 ">Alterar</button>
                             </div>
                         </form>
                     </div>
@@ -66,14 +66,24 @@
         </div>
     </div>
 
-    
 
 
-    <div class="flex flex-col items-center">
-        <h1 class="text-lg font-semibold mb-2">Últimas 10 medições</h1>
-    </div>
+
 
     <div class="py-1 flex justify-center items-center mb-4">
+        <div class="flex flex-col items-end mt-4">
+            <label for="rangeSelect" class="text-gray-700">Selecione o intervalo:</label>
+            <select id="rangeSelect" class="mt-2">
+                <option value="minute">Minuto</option>
+                <option value="hour">Hora</option>
+                <option value="day">Dia</option>
+                <option value="week">Semana</option>
+                <option value="month">Mês</option>
+                <option value="year">Ano</option>
+                <!-- Adicione outras opções conforme necessário -->
+            </select>
+        </div>
+
         <div id="chart-container" class="chart-container">
             <canvas id="myChart" class="chart-canvas"></canvas>
         </div>
@@ -87,60 +97,86 @@
 
 
 
-    {{-- <small>Código do grafico</small> --}}
-
-
-    <div id="chart-container" class="py-1 flex justify-center mb-4">
-        <canvas id="myChart"></canvas>
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const mac = "{{ $dispositivo->MAC }}";
+            let range = "{{ 'day' }}"; // Valor padrão
+            let myChart = null; // Variável para armazenar a instância do gráfico
 
-            fetch(`/sensor/ultimosDez/${encodeURIComponent(mac)}`)
-                .then(response => response.json())
-                .then(data => {
-                    const labels = data.labels;
-                    const valores = data.valores;
+            // Escuta o evento de mudança no elemento <select>
+            document.getElementById('rangeSelect').addEventListener('change', function() {
+                range = this.value; // Atualiza a variável range com o valor selecionado
+                fetchData(mac, range); // Chama a função para buscar os dados com o novo range
+            });
 
-                    const ctx = document.getElementById('myChart').getContext('2d');
-                    const myChart = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'Valores da corrente',
-                                data: valores,
-                                borderColor: 'blue',
-                                fill: false
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            scales: {
-                                x: {
-                                    display: true,
-                                    title: {
+            // Função para buscar os dados e atualizar o gráfico
+            function fetchData(mac, range) {
+                fetch(`/sensor/ultimosDez/${encodeURIComponent(mac)}/${encodeURIComponent(range)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const labels = data.labels;
+                        const valores = data.valores;
+
+                        if (myChart) {
+                            myChart.destroy(); // Destroi a instância atual do gráfico
+                        }
+
+                        const ctx = document.getElementById('myChart').getContext('2d');
+                        myChart = new Chart(ctx, {
+                            type: 'bar', // Altera para gráfico de barras
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'Valores da corrente',
+                                    data: valores,
+                                    backgroundColor: 'rgba(0, 128, 0, 0.2)',
+                                    borderColor: 'green',
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                scales: {
+                                    x: {
                                         display: true,
-                                        text: 'Data e Hora da Medição'
+                                        title: {
+                                            display: true,
+                                            text: 'Data e Hora da Medição'
+                                        }
+                                    },
+                                    y: {
+                                        display: true,
+                                        title: {
+                                            display: true,
+                                            text: 'Valores da Corrente'
+                                        }
                                     }
                                 },
-                                y: {
-                                    display: true,
+                                plugins: {
                                     title: {
                                         display: true,
-                                        text: 'Valores da Corrente'
+                                        text: 'Gráfico de Medição', // Título do gráfico
+                                        font: {
+                                            size: 18
+                                        }
                                     }
                                 }
                             }
-                        }
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Ocorreu um erro:', error);
                     });
-                })
-                .catch(error => {
-                    console.error('Ocorreu um erro:', error);
-                });
+            }
+
+            // Chama a função para buscar os dados iniciais com o range padrão
+            fetchData(mac, range);
+
+            // Atualiza o gráfico a cada minuto
+            setInterval(function() {
+                fetchData(mac, range);
+            }, 60000); // 60000 milissegundos = 1 minuto
         });
     </script>
 

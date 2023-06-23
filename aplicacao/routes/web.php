@@ -58,7 +58,7 @@ Route::put('/device/{id}', [DeviceController::class,'update'])->name('device.upd
 
 //caso eu queira criar um controller que faça o redirecionamento correto
 //Route::put('/device/{id}', [DeviceController::class,'update-dashboard'])->name('device.update-dashboard');
-Route::get('/sensor/ultimosDez/{topico}', [SensorController::class, 'ultimosDez'])->name('sensor.ultimosDez');
+Route::get('/sensor/ultimosDez/{topico}/{range?}', [SensorController::class, 'ultimosDez'])->name('sensor.ultimosDez');
 
 Route::get('/status/fetch', [StatusController::class, 'fetchStatus'])->name('status.fetch');
 

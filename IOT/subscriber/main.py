@@ -54,7 +54,8 @@ while True:
         print("Hora: " + datetime.datetime.now(datetime.timezone.utc).strftime("%H:%M:%S"))
         print("QoS: "+str(msg.qos))
         print("=============================")
-           
+        
+        bd_manipulator.insert_data(msg.payload, msg.topic, msg.qos, datetime.datetime.now(datetime.timezone.utc))
     
     #insert no DB
     mqtt_communicator.client.on_message = handle_message

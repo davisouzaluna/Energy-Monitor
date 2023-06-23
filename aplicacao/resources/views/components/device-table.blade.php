@@ -6,16 +6,17 @@
               <img style="width:400px; " src="{{ asset('img/img3.jpeg') }}" class="card-img-top img-fluid" alt="Relógio">
               <div class="card-body">
                 <h5 class="card-category secondary-color">{{ $dispositivo->nome }}</h5>
-                <p class="card-title">{{ $dispositivo->MAC }}</p>
+                <p class="card-title">{{ $dispositivo->descricao }}</p>
                 <div class="d-flex justify-content-center">
     
-                    <a class="btn btn-primary d-flex justify-content-center align-items-center btn btn-primary  mx-2" href="{{ route('device.edit', $dispositivo->id) }}">Visualizar</a>
-    
+                  
+                    <a href="{{route('device.edit',$dispositivo->id)}}"<button class="px-3 py-1  bg-blue-500 text-white rounded-md transition ease-in-out delay-100 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-200 " type="submit">Visualizar</button></a>
+                  
     
                     <form action="{{ route('device.destroy', $dispositivo->id) }}" method="post">
                         @csrf
                         @method('delete')
-                        <button class="d-flex justify-content-center align-items-center btn btn-danger mx-2 btn btn-primary" type="submit">Excluir</button>
+                        <button class="px-2 py-1  bg-red-500 text-white rounded-md transition ease-in-out delay-100 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-red-500 duration-200 " type="submit">Excluir</button>
                     </form>
                 </div>
     
