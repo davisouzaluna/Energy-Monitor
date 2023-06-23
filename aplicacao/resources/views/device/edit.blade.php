@@ -20,38 +20,37 @@
     </style>
 
 
-
+<br>
     <div class="py-1 flex justify-center">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-4 sm:p-6 mt-1 mb-1">
+            <div class="bg-[#B9C6EC] overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-2 sm:p-4 mt-2 mb-2">
                     <!-- Ajustando as margens superior (mt-4) e inferior (mb-2) aqui -->
-                    <h2 class="text-lg font-semibold mb-4">{{ __('Cadastre um novo dispositivo:') }}</h2>
+                    <h2 class="text-lg text-blue-700 font-semibold mb-4">{{ __('Cadastre um novo dispositivo') }}</h2>
 
-                    <div div class="py-1 flex justify-center mb-4">
-                        <form method="POST" action="{{ route('device.update', $dispositivo->id) }}" class="space-y-6">
+                    <div div class="py-0 flex justify-center mb-4">
+                        <form method="POST" action="{{ route('device.update', $dispositivo->id) }}" class="space-y-2">
                             @csrf
                             @method('PUT')
-
                             <div>
-                                <label for="nome" class="mb-1 block font-semibold text-gray-700">Nome:</label>
+                                <label for="nome" class="mb-1 block font-semibold text-blue-700">Nome:</label>
                                 <input type="text" name="nome" id="nome" required
                                     value="{{ old('nome') ?? $dispositivo->nome }}"
                                     class="px-2 py-1 block w-full border-gray-300 rounded-md" autocomplete="nome">
                             </div>
 
                             <div>
-                                <label for="descricao" class="mb-1 block font-semibold text-gray-700">Descrição:</label>
+                                <label for="descricao" class="mb-1 block font-semibold text-blue-700">Descrição:</label>
                                 <input type="text" name="descricao" id="descricao" required
                                     value="{{ old('descricao') ?? $dispositivo->descricao }}"
                                     class="px-2 py-1 block w-full border-gray-300 rounded-md" autocomplete="descricao">
                             </div>
 
                             <div>
-                                <label for="mac" class="mb-1 block font-semibold text-gray-700">MAC:</label>
+                                <label for="mac" class="mb-1 block font-semibold text-blue-700">MAC:</label>
                                 <input type="text" name="MAC" id="mac" required
                                     value="{{ old('MAC') ?? $dispositivo->MAC }}"
-                                    class="px-2 py-1 block w-full border-gray-300 rounded-md" autocomplete="mac">
+                                    class="px-2 py-1 block w-full border-gray-300 rounded-md mb-5" autocomplete="mac">
                                 {{-- <small>O MAC deve conter exatamente 12 caracteres alfanuméricos (A-F, a-f, 0-9).</small> --}}
                             </div>
 
@@ -66,17 +65,11 @@
         </div>
     </div>
 
-    <div div class="py-1 flex justify-center">
-        <form action="{{ route('dashboard') }}" method="GET" style="display: inline;">
-            @csrf
-            <button type="submit" class="btn btn-success">{{ 'dashboard' }}</button>
-        </form>
-    </div>
 
 
-
+<br>
     <div class="flex flex-col items-center">
-        <h1 class="text-lg font-semibold mb-2">Últimas 10 medições</h1>
+        <h1 class="text-lg font-semibold mb-2 text-blue-700">Últimas 10 medições</h1>
     </div>
 
     <div class="py-1 flex justify-center items-center mb-4">
@@ -161,6 +154,6 @@
                 dispositivo</button>
         </form>
     </div>
-
+<br>
 
 </x-app-layout>

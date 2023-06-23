@@ -4,11 +4,11 @@ header {
 }
 
 .navbar {
-    background-color: #B9C6EC;
+    background-color: #b9c6ec;
     color: white;
     font-family: Arial, sans-serif;
-    height: 90px; /* define a altura da navbar */
-    padding: 10px;
+    height: 150px; /* define a altura da navbar */
+    padding: 1px;
     display: flex;
     justify-content: center;
 }

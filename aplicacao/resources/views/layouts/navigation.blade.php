@@ -1,19 +1,19 @@
 <nav x-data="{ open: false }" class="bg-[#B9C6EC] border-b border-gray-100">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex h-32 justify-center items-center"> <!-- Adicionadas as classes justify-center e items-center -->
+    <div class="navbar">
+        <div class="flex h-40 pl-96 ml-50justify-center items-center"> <!-- Adicionadas as classes justify-center e items-center -->
             <!-- Logo -->
             <div>
                 <a href="{{ route('dashboard') }}">
-                    <img src="{{asset('img/Logotipo.png')}}" class="h-32 w-32" alt="Logo">
+                    <img src="{{asset('img/Logotipo.png')}}" class="h-48 w-38" alt="Logo">
                 </a>
             </div>
         </div>
         <!-- Settings Dropdown -->
-        <div class="hidden sm:flex justify-items-end ml-auto"> <!-- Adicionada a classe ml-auto -->
+        <div> <!-- Adicionada a classe ml-auto -->
             <x-dropdown width="48">
                 <x-slot name="trigger">
-                    <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-blue-700 hover:text-blue-600 focus:outline-none transition ease-in-out duration-150">
+                    <button class="inline-flex flex items-center mlpr-96 px-2 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-blue-700 hover:text-blue-600 focus:outline-none transition ease-in-out duration-150">
                         <div class="text-white">{{ Auth::user()->name }}</div>
 
                         <div class="ml-1 text-white">

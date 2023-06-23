@@ -9,66 +9,35 @@
           <a href="{{ route('device.index') }}" class="inline-block px-6 py-3 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition-colors">Cadastrar dispositivo</a>
           <a href="{{ route('log.erro') }}" class="inline-block px-6 py-3 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition-colors">Log dos erros</a>
          --}}
-    <br><br>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h3>Dispositivos cadastrados:</h3>
-    <div class="grid grid-cols-3 gap-3">
-    
-    <table class="table flex justify-center">
-        <thead>
+<br>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h3 class="text-blue-700 text-center">Dispositivos cadastrados</h3>
+    <div class="grid grid-cols-4 gap-4">
 
-        </thead>
-        <tbody>
-            @php
-                $colCount = 0;
-            @endphp
-
-            @foreach ($dispositivos as $dispositivo)
-                @if ($colCount === 0)
-                    <tr>
-                @endif
-
-                <td>
-                    <form action="{{ route('device.edit', $dispositivo->id) }}" method="GET" style="display: inline;">
-                        @csrf
-                        <div class="flex items-center">
-                            <button type="submit" class="btn btn-success">
-                                <div class="flex items-center">
-                                    <img src="/img/eletrodomestico.png" alt="Imagem do dispositivo" width="100"
-                                        height="100" style="max-width: 80px; height: auto;">
-                                    <span class="ml-2">{{ $dispositivo->nome }}</span>
-                                </div>
-                            </button>
-                        </div>
-                    </form>
-                </td>
-
-                @php
-                    $colCount++;
-                    if ($colCount === 3) {
-                        $colCount = 0;
-                        echo '</tr>';
-                    }
-                @endphp
-            @endforeach
-
-            @if ($colCount !== 0)
-                @php
-                    $remainingCols = 3 - $colCount;
-                @endphp
-
-                @while ($remainingCols > 0)
-                    <td></td>
-                    @php
-                        $remainingCols--;
-                    @endphp
-                @endwhile
-
-                </tr>
-            @endif
-        </tbody>
-    </table>
+    @foreach ($dispositivos as $dispositivo)
+      <!--     primera card -->
+      <div class="bg-white w-48 h-60 shadow-md rounded m-3">
+          <div class="h-3/4 w-full">
+          <form action="{{ route('device.edit', $dispositivo->id) }}" method="GET" style="display: inline;">
+            @csrf
+              <div class="flex items-center">
+                <button type="submit" class="btn btn-success">
+                    <div class="flex items-center">
+                        <img src="/img/eletrodomestico.png" alt="Imagem do dispositivo" width="200"
+                            height="400">
+                        
+                    </div>
+                </button>
+              </div>
+          </form>
+          </div>
+            <div class="w-full h-1/4 p-3 text-center">
+              <span class="text-lg font-semibold uppercase tracking-wide ">{{$dispositivo->nome}}</span>
+            </div>
+    </div>
+    @endforeach
 </div>
+     
     <head>
         <title>Modal</title>
         <style>
@@ -92,6 +61,7 @@
             border: 1px solid #888;
             width: 80%;
             max-width: 500px;
+            border-radius: 10;
           }
       
           .modal-close {
@@ -119,37 +89,38 @@
         </script>
       </head>
       <body>
-        <button onclick="openModal()"  class="inline-block px-6 py-3 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition-colors  place-items-center">Cadastrar dispositivo</button>
         
+        <button onclick="openModal()" class="flex justify-center items-center px-6 py-3 bg-blue-500  text-white font-semibold rounded-md hover:bg-blue-600 transition-colors" style="margin-left:380px">Cadastrar dispositivo</button>
+        <br>
         <div id="myModal" class="modal">
           <div class="modal-content">
             <span class="modal-close" onclick="closeModal()">&times;</span>
-            <h2>Cadastre um novo dispositivo:</h2>
+            <h2 class="text-blue-700">Cadastre um novo dispositivo</h2>
             <form method="POST" action="<?php echo route('device.store'); ?>">
                 <div class="py-1 flex justify-center">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="bg-[#B9C6EC] overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-4 sm:p-6 mt-1 mb-1">
                     <!-- Ajustando as margens superior (mt-4) e inferior (mb-2) aqui -->
                     @csrf
                     
                     <div>
-                    <label for="nome" class="mb-1 block font-semibold text-gray-700">Nome:</label>
+                    <label for="nome" class="mb-1 block font-semibold text-blue-700">Nome:</label>
                     <input type="text" name="nome" id="nome" required value="{{ old('nome') }}"
                     class="px-2 py-1 block w-full border-gray-300 rounded-md" autocomplete="nome">
                     </div>
                     
                     <div>
-                    <label for="descricao" class="mb-1 block font-semibold text-gray-700">Descrição:</label>
+                    <label for="descricao" class="mb-1 block font-semibold text-blue-700">Descrição:</label>
                     <input type="text" name="descricao" id="descricao" required
                     value="{{ old('descricao') }}" class="px-2 py-1 block w-full border-gray-300 rounded-md"
                     autocomplete="descricao">
                     </div>
                     
                     <div>
-                    <label for="mac" class="mb-1 block font-semibold text-gray-700">MAC:</label>
+                    <label for="mac" class="mb-1 block font-semibold text-blue-700">MAC:</label>
                     <input type="text" name="MAC" id="mac" required value="{{ old('MAC') }}"
-                    class="px-2 py-1 block w-full border-gray-300 rounded-md" autocomplete="mac">
+                    class="px-2 py-1 block w-full border-gray-300 rounded-md mb-4" autocomplete="mac">
                     {{-- <small>O MAC deve conter exatamente 12 caracteres alfanuméricos (A-F, a-f, 0-9).</small> --}}
                     </div>
                     
