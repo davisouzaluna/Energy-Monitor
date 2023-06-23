@@ -1,55 +1,29 @@
-<h3>Dispositivos cadastrados:</h3>
-    <div class="grid grid-cols-3 gap-4">
-            <table class="table flex justify-center">
-                <thead>
-                    <!-- Cabeçalho da tabela -->
-                </thead>
-                <tbody>
-                    @php
-                        $colCount = 0;
-                    @endphp
-
-                    @foreach ($dispositivos as $dispositivo)
-                       
-                        <td>
-                            <form action="{{ route('device.edit', $dispositivo->id) }}" method="GET"
-                                style="display: inline;">
-                                @csrf
-                                <div class="flex items-center">
-                                    <button type="submit" class="btn btn-success">
-                                        <div class="flex items-center">
-                                            <img src="/img/eletrodomestico.png" alt="Imagem do dispositivo"
-                                                width="100" height="100" style="max-width: 80px; height: auto;">
-                                            <span class="ml-2">{{ $dispositivo->nome }}</span>
-                                        </div>
-                                    </button>
-                                </div>
-                            </form>
-                        </td>
-
-                        @php
-                            $colCount++;
-                            if ($colCount === 3) {
-                                $colCount = 0;
-                                echo '</tr>';
-                            }
-                        @endphp
-                    @endforeach
-
-                    @if ($colCount !== 0)
-                        @php
-                            $remainingCols = 3 - $colCount;
-                        @endphp
-
-                        @while ($remainingCols > 0)
-                            <td></td>
-                            @php
-                                $remainingCols--;
-                            @endphp
-                        @endwhile
-
-                        </tr>
-                    @endif
-                </tbody>
-            </table>
-    </div>
+<div class="container" id="best-sellers">
+        <div class="row">
+        @foreach ($dispositivos as $dispositivo)
+          <div class="col-12 col-md-4 mb-4">
+            <div class="card primary-bg-color">
+              <img style="width:400px; " src="{{ asset('img/img3.jpeg') }}" class="card-img-top img-fluid" alt="Relógio">
+              <div class="card-body">
+                <h5 class="card-category secondary-color">{{ $dispositivo->nome }}</h5>
+                <p class="card-title">{{ $dispositivo->MAC }}</p>
+                <div class="d-flex justify-content-center">
+    
+                    <a class="btn btn-primary d-flex justify-content-center align-items-center btn btn-primary  mx-2" href="{{ route('device.edit', $dispositivo->id) }}">Visualizar</a>
+    
+    
+                    <form action="{{ route('device.destroy', $dispositivo->id) }}" method="post">
+                        @csrf
+                        @method('delete')
+                        <button class="d-flex justify-content-center align-items-center btn btn-danger mx-2 btn btn-primary" type="submit">Excluir</button>
+                    </form>
+                </div>
+    
+              </div>
+            </div>
+    
+          </div>
+          @endforeach
+    
+        </div>
+      </div>
