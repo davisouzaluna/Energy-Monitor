@@ -1,6 +1,7 @@
 <!-- Botão para abrir o modal -->
-<button onclick="openModal()" class="px-4 py-2 bg-blue-500 text-white rounded-md transition ease-in-out delay-100 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-200">Abrir Modal</button>
-
+<div class="d-flex justify-content-center align-items-center" style="height: 10vh;">
+<button onclick="openModal()" class="px-4 py-2 bg-green-500 text-white rounded-md transition ease-in-out delay-100 bg-green-650 hover:-translate-y-1 hover:scale-110 hover:bg-green-800 duration-200">Cadastre novo Dispositivo</button>
+</div>
 <!-- Modal -->
 <div id="myModal" class="modal-overlay">
     <div class="modal-content">

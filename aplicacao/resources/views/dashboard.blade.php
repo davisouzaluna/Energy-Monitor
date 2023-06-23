@@ -15,7 +15,7 @@
     <br><br>
 
     @if (@count($dispositivos) == 0)
-    <x-create-device/>
+    <x-formulario :dispositivos="$dispositivos"/>
         @else
         <x-device-table :dispositivos="$dispositivos" />
         <x-create-device/>
