@@ -53,16 +53,17 @@
                                 <button type="submit"
                                     class="px-4 py-2  bg-blue-500 text-white rounded-md transition ease-in-out delay-100 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-200 ">Alterar</button>
                             </div>
-                            <div class="flex justify-center">
-                                <form action="{{ route('device.destroy', $dispositivo->id) }}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit"
-                                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded">Excluir
-                                        dispositivo</button>
-                                </form>
+                            
                             </div>
                         </form>
+                        <div class="flex justify-center">
+                            <form action="{{ route('device.destroy', $dispositivo->id) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit"
+                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded">Excluir
+                                    dispositivo</button>
+                            </form>
                     </div>
                 </div>
             </div>
