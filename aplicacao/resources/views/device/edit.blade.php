@@ -2,17 +2,16 @@
 
     <style>
         .chart-container {
-            width: 80%;
-            /* Defina o valor desejado para a largura */
-            height: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
             /* Defina o valor desejado para a altura */
         }
 
         .chart-canvas {
-            width: 400px;
-            /* Largura desejada */
-            height: 300px;
-            /* Altura desejada */
+            max-width: 100%;
+            max-height: 100%;
         }
     </style>
 
@@ -54,6 +53,15 @@
                                 <button type="submit"
                                     class="px-4 py-2  bg-blue-500 text-white rounded-md transition ease-in-out delay-100 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-200 ">Alterar</button>
                             </div>
+                            <div class="flex justify-center">
+                                <form action="{{ route('device.destroy', $dispositivo->id) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit"
+                                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded">Excluir
+                                        dispositivo</button>
+                                </form>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -80,7 +88,7 @@
 
                     <br/>
                     <div class="bg-green-300 py-4 rounded-lg text-center">
-                        <h3 class="text-lg text-black font-semibold">Valor da taxa</h3>
+                        <h3 class="text-lg text-black font-semibold">Valor da taxa em R$</h3>
                         <div class="py-1 flex justify-center">
                             <input type="number" name="valor" id="valor" min="0.01" step="0.01"
                                 class="mt-1 text-lg text-yellow-600 px-2 py-1 block w-32 border-gray-300 rounded-md"
@@ -92,15 +100,15 @@
             </div>
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-4 sm:p-6 mt-1 mb-1">
-                    <div class="flex flex-col items-end mt-10">
+                <div class="p-4 sm:p-6 mt-1 mb-1 text-center">
+                    <div class="flex flex-col items-end mt-10 mx-auto">
                         <label for="voltageSelect" class="text-lg text-black font-semibold">Selecione a tensão:</label>
                         <select id="voltageSelect" class="mt-2">
                             <option value="110">110V</option>
                             <option value="220">220V</option>
                         </select>
                     </div>
-                    <div class="flex flex-col items-end mt-20">
+                    <div class="flex flex-col items-end mt-20 mx-auto">
                         <label for="rangeSelect" class="text-lg text-black font-semibold">Selecione o intervalo:</label>
                         <select id="rangeSelect" class="mt-2">
                             <option value="minute">Minuto</option>
@@ -131,15 +139,7 @@
         </div>
 
 
-        <div class="py-1 flex justify-center">
-            <form action="{{ route('device.destroy', $dispositivo->id) }}" method="post">
-                @csrf
-                @method('delete')
-                <button type="submit"
-                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded">Excluir
-                    dispositivo</button>
-            </form>
-        </div>
+        
 
         <div id="chart-container" class="chart-container">
             <canvas id="myChart" class="chart-canvas"></canvas>
