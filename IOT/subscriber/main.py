@@ -30,7 +30,7 @@ bd_manipulator.connect()
 mqtt_communicator.connect()
 
 # Inscrever-se em vários tópicos/DEBUG
-topics = [("topic1", 0), ("111111111111", 0), ("dataSet", 0)]
+topics = [("BC:FF:4D:FB:5E:B4", 0), ("111111111111", 0), ("aquamon02", 0),("bc:ff:4d:fb:5e:b4",0)]
 mqtt_communicator.subscribe_to_topics(topics)
 
 # Função de tratamento de sinal para interromper o programa corretamente
@@ -54,13 +54,7 @@ while True:
         print("Hora: " + datetime.datetime.now(datetime.timezone.utc).strftime("%H:%M:%S"))
         print("QoS: "+str(msg.qos))
         print("=============================")
-        mensagem = int(msg.payload)
-        topico = str(msg.topic)
-        qos = msg.qos
-        data_hora_medicao = datetime.datetime.now(datetime.timezone.utc)#.strftime("%Y-%m-%d %H:%M:%S")
-        
-        #Nesse método pode ser feito o insert de qualquer banco, quando as classes forem criadas
-        bd_manipulator.insert_data(mensagem, topico, qos, data_hora_medicao)    
+           
     
     #insert no DB
     mqtt_communicator.client.on_message = handle_message

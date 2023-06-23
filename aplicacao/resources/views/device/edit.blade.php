@@ -5,7 +5,7 @@
 
     <style>
         .chart-container {
-            width: 70%;
+            width: 80%;
             /* Defina o valor desejado para a largura */
             height: 50%;
             /* Defina o valor desejado para a altura */
@@ -26,7 +26,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-4 sm:p-6 mt-1 mb-1">
                     <!-- Ajustando as margens superior (mt-4) e inferior (mb-2) aqui -->
-                    <h2 class="text-lg font-semibold mb-4">{{ __('Cadastre um novo dispositivo:') }}</h2>
+                    <h2 class="text-lg font-semibold mb-4">{{ __('Altere o seu dispositivo:') }}</h2>
 
                     <div div class="py-1 flex justify-center mb-4">
                         <form method="POST" action="{{ route('device.update', $dispositivo->id) }}" class="space-y-6">
@@ -49,7 +49,7 @@
 
                             <div>
                                 <label for="mac" class="mb-1 block font-semibold text-gray-700">MAC:</label>
-                                <input type="text" name="MAC" id="mac" required
+                                <input type="text" name="MAC" maxlength="12" id="mac" required
                                     value="{{ old('MAC') ?? $dispositivo->MAC }}"
                                     class="px-2 py-1 block w-full border-gray-300 rounded-md" autocomplete="mac">
                                 {{-- <small>O MAC deve conter exatamente 12 caracteres alfanuméricos (A-F, a-f, 0-9).</small> --}}
@@ -66,13 +66,7 @@
         </div>
     </div>
 
-    <div div class="py-1 flex justify-center">
-        <form action="{{ route('dashboard') }}" method="GET" style="display: inline;">
-            @csrf
-            <button type="submit" class="btn btn-success">{{ 'dashboard' }}</button>
-        </form>
-    </div>
-
+    
 
 
     <div class="flex flex-col items-center">
