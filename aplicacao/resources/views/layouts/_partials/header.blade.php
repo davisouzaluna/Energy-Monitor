@@ -1,4 +1,6 @@
 <header>
+    
+    
     <nav class="navbar flex items-center justify-between">
         <div>
             <img src="{{asset('img/Logotipo.png')}}" class="h-40 w-40" alt="Logo">
@@ -12,6 +14,7 @@
             @endauth
         </ul>
     </nav>
+    
 </header>
 
 

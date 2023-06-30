@@ -1,5 +1,5 @@
-<nav x-data="{ open: false }" class="bg-[#B9C6EC] border-b border-gray-100">
-    <!-- Primary Navigation Menu -->
+<nav x-data="{ open: false }" class="bg-transparent border-b border-gray-100">
+    <!-- Primary Navigation Menu [#B9C6EC]-->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
@@ -10,14 +10,14 @@
                         {{--<x-application-logo class="block h-9 w-auto fill-current text-gray-800" />--}}
                     </a>
                 </div>
-
-                <!-- Navigation Links 
+                <ul class="flex flex-col mt-4 font-medium md:flex-row md:space-x-8 md:mt-0">
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('sobre')" :active="request()->routeIs('sobre')">
                         {{ __('Sobre') }}
                     </x-nav-link>
-                </div>
-
+                </div>      
+                
+                <!--
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Contato') }}
