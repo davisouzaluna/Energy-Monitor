@@ -317,6 +317,12 @@
     const nomeDispositivo = document.getElementById('nome').value;
     const descricaoDispositivo = document.getElementById('descricao').value;
     const macDispositivo = document.getElementById('mac').value;
+    const logo = `
+  <div style="display: flex; justify-content: center; align-items: center; height: 10vh;">
+    <img src="${window.location.origin}/img/Logotipo.png" alt="Logo" style="width: 200px; height: auto;">
+  </div>
+`;
+
 
     const printWindow = window.open('', '_blank');
     printWindow.document.open();
@@ -333,6 +339,7 @@
                 </style>
             </head>
             <body>
+               ${logo}
                 <h1>Relatório de Consumo</h1>
                 <h2>Dados do Dispositivo:</h2>
                 <p>Nome: ${nomeDispositivo}</p>
