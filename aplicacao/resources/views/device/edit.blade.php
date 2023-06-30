@@ -96,6 +96,11 @@
                                 placeholder="">
                         </div>
                     </div>
+                    <div class=" py-4 rounded-lg text-center">
+                    <button onclick="printReport()" class="px-4 py-2 bg-blue-500 text-white rounded-md transition ease-in-out delay-100 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-200">
+                        Imprimir Relatório
+                    </button>
+                    </div>
                     <!-- Conteúdo da segunda div -->
                 </div>
             </div>
@@ -298,5 +303,56 @@
             }, 60000); // 60000 milissegundos = 1 minuto
         });
     </script>
+
+
+<script>
+    function printReport() {
+    const chartContainer = document.getElementById('chart-container');
+    const canvas = chartContainer.querySelector('canvas');
+    const chartImage = canvas.toDataURL();
+
+    const consumoKwh = document.getElementById('kwh').textContent;
+    const total = document.getElementById('total').textContent;
+
+    const nomeDispositivo = document.getElementById('nome').value;
+    const descricaoDispositivo = document.getElementById('descricao').value;
+    const macDispositivo = document.getElementById('mac').value;
+
+    const printWindow = window.open('', '_blank');
+    printWindow.document.open();
+    printWindow.document.write(`
+        <html>
+            <head>
+                <title>Relatório de Consumo</title>
+                <style>
+                    @media print {
+                        button {
+                            display: none;
+                        }
+                    }
+                </style>
+            </head>
+            <body>
+                <h1>Relatório de Consumo</h1>
+                <h2>Dados do Dispositivo:</h2>
+                <p>Nome: ${nomeDispositivo}</p>
+                <p>Descrição: ${descricaoDispositivo}</p>
+                <p>MAC: ${macDispositivo}</p>
+
+                <h2>Dados de Consumo:</h2>
+                <p>Consumo em kWh: ${consumoKwh}</p>
+                <p> ${total}</p>
+
+                <h2>Gráfico de Consumo:</h2>
+                <img src="${chartImage}" alt="Gráfico de Consumo">
+
+                <button onclick="window.print()">Imprimir</button>
+            </body>
+        </html>
+    `);
+    printWindow.document.close();
+}
+
+</script>
 
 </x-app-layout>

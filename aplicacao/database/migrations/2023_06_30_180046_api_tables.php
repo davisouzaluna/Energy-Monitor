@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 return new class extends Migration
 {
     /**
@@ -19,7 +20,9 @@ return new class extends Migration
             $table->dateTime('data_hora_medicao');
             $table->float('qos');
             $table->timestamps();
+            
         });
+
 
         Schema::create('log_erro', function (Blueprint $table) {
             $table->id();
@@ -49,4 +52,6 @@ return new class extends Migration
         Schema::dropIfExists('log_erro');
         Schema::dropIfExists('status');
     }
+
+    
 };
