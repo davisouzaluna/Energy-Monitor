@@ -39,11 +39,8 @@ class DeviceController extends Controller
             try {
                 $imagem = $request->file('imagem');
 
-                // Redimensiona a imagem para um tamanho máximo de 800x800 pixels
-                $image = Image::make($imagem)->resize(800, 800, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
+                // Redimensiona a imagem para um tamanho máximo de 1280x720 pixels
+                $image = Image::make($imagem)->resize(1280, 720);
 
                 // Salva a imagem na pasta public/imagens com qualidade de 90%
                 $nomeArquivo = $imagem->getClientOriginalName();
@@ -57,7 +54,7 @@ class DeviceController extends Controller
             }
         } else {
             // Define o valor padrão para o campo "imagem"
-            $data['imagem'] = 'img/img3.jpeg';
+            $data['imagem'] = 'img/img4_resize.jpeg';
         }
 
         $register = Device::create($data);
@@ -96,11 +93,8 @@ class DeviceController extends Controller
             try {
                 $imagem = $request->file('imagem');
 
-                // Redimensiona a imagem para um tamanho máximo de 800x800 pixels
-                $image = Image::make($imagem)->resize(1600, 1600, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
+                // Redimensiona a imagem para um tamanho máximo de 1280x720 pixels
+                $image = Image::make($imagem)->resize(1280, 720);
                 
 
                 // Salva a imagem na pasta public/imagens com qualidade de 90%

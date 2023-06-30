@@ -30,7 +30,7 @@
 
                     <div>
                         <label for="imagem" class="mb-1 block font-semibold text-gray-700">Imagem:</label>
-                        <input type="file" name="imagem" id="imagem" class="block w-full border-gray-300 rounded-md" accept="image/*" required>
+                        <input type="file" name="imagem" id="imagem" class="block w-full border-gray-300 rounded-md" accept="image/*" >
                     </div>
 
                 </form>
