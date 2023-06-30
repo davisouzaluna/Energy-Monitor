@@ -122,8 +122,9 @@
                         </select>
                     </div>
 
-                    <div class="flex flex-col items-end mt-20 mx-auto">
-                        <select id="bandeiraTarifaria">
+                    <div class="flex flex-col  mt-10 mx-auto">
+                        <label for="bandeiraTarifaria" class="text-lg text-black font-semibold">Selecione a bandeira:</label>
+                        <select id="bandeiraTarifaria" class="mt-2">
                             <option value="verde">Bandeira Verde</option>
                             <option value="amarela">Bandeira Amarela</option>
                             <option value="vermelha1">Bandeira Vermelha - Patamar 1</option>
