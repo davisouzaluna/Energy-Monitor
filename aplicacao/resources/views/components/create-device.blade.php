@@ -10,7 +10,7 @@
             <button type="button" class="close" onclick="closeModal()">&times;</button>
         </div>
         <div class="modal-body">
-            <form method="POST" action="{{ route('device.store') }}" class="space-y-6 px-6 lg:px-8 pb-4 sm:pb-6 xl:pb-8">
+            <form method="POST" action="{{ route('device.store') }}" enctype="multipart/form-data" class="space-y-6 px-6 lg:px-8 pb-4 sm:pb-6 xl:pb-8">
                 @csrf
                 <div class="form-group">
                     <label for="nome" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Nome:</label>
@@ -24,9 +24,17 @@
                     <label for="mac" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">MAC:</label>
                     <input type="text" maxlength="12" name="MAC" id="mac" required value="{{ old('MAC') }}" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" autocomplete="mac">
                 </div>
+                <div>
+                    <label for="imagem" class="mb-1 block font-semibold text-gray-700">Imagem:</label>
+                    <input type="file" name="imagem" id="imagem"
+                        class="block w-full border-gray-300 rounded-md" accept="image/*">
+                </div>
+
                 <div class="flex justify-center">
                     <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Enviar</button>
                 </div>
+                
+                
             </form>
         </div>
     </div>
@@ -55,6 +63,26 @@
             closeModal();
         }
     };
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Escuta o evento de mudança no campo de entrada de arquivo
+        document.getElementById('imagem').addEventListener('change', function(event) {
+            const file = event.target.files[0]; // Obtém o arquivo selecionado pelo usuário
+
+            if (file) {
+                // Cria uma URL para a imagem selecionada
+                const imageUrl = URL.createObjectURL(file);
+
+                // Exibe a imagem no card
+                const cardImage = document.getElementById('card-image');
+                cardImage.src = imageUrl;
+                cardImage.style.display = 'block'; // Exibe a imagem
+
+                // Limpa o campo de entrada de arquivo
+                event.target.value = '';
+            }
+        });
+    });
 </script>
 
 <style>

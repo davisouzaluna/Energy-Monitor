@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nome');
             $table->string('descricao');
             $table->string('MAC', 12);
+            $table->string('imagem')->nullable();
             $table->timestamps();
         });
     }
