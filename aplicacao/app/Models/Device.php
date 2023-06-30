@@ -12,6 +12,7 @@ class Device extends Model
     protected $fillable = [
         'nome',
         'descricao',
-        'MAC'
+        'MAC',
+        'imagem',
     ];
 }

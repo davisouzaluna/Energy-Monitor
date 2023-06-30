@@ -53,17 +53,17 @@
                                 <button type="submit"
                                     class="px-4 py-2  bg-blue-500 text-white rounded-md transition ease-in-out delay-100 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-200 ">Alterar</button>
                             </div>
-                            
-                            </div>
+
+                    </div>
+                    </form>
+                    <div class="flex justify-center">
+                        <form action="{{ route('device.destroy', $dispositivo->id) }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button type="submit"
+                                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded">Excluir
+                                dispositivo</button>
                         </form>
-                        <div class="flex justify-center">
-                            <form action="{{ route('device.destroy', $dispositivo->id) }}" method="post">
-                                @csrf
-                                @method('delete')
-                                <button type="submit"
-                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded">Excluir
-                                    dispositivo</button>
-                            </form>
                     </div>
                 </div>
             </div>
@@ -78,16 +78,16 @@
                             <div id="kwh" class="mt-1 text-lg text-yellow-600"></div>
                         </div>
                     </div>
-                    <br/>
+                    <br />
                     <div class="bg-green-300 py-4 rounded-lg text-center">
                         <h3 class="text-lg text-black font-semibold">Consumo em kWh</h3>
                         <div class="py-1 flex justify-center">
                             <div id="total" class="mt-1 text-lg text-yellow-600"></div>
                         </div>
-                        
+
                     </div>
 
-                    <br/>
+                    <br />
                     <div class="bg-green-300 py-4 rounded-lg text-center">
                         <h3 class="text-lg text-black font-semibold">Valor da taxa em R$</h3>
                         <div class="py-1 flex justify-center">
@@ -95,6 +95,11 @@
                                 class="mt-1 text-lg text-yellow-600 px-2 py-1 block w-32 border-gray-300 rounded-md"
                                 placeholder="">
                         </div>
+                    </div>
+                    <div class=" py-4 rounded-lg text-center">
+                    <button onclick="printReport()" class="px-4 py-2 bg-blue-500 text-white rounded-md transition ease-in-out delay-100 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-200">
+                        Imprimir Relatório
+                    </button>
                     </div>
                     <!-- Conteúdo da segunda div -->
                 </div>
@@ -112,7 +117,7 @@
                     <div class="flex flex-col items-end mt-20 mx-auto">
                         <label for="rangeSelect" class="text-lg text-black font-semibold">Selecione o intervalo:</label>
                         <select id="rangeSelect" class="mt-2">
-                            <option value="minute">Minuto</option>
+                            <option value="minute">minuto</option>
                             <option value="hour">Hora</option>
                             <option value="day">Dia</option>
                             <option value="week">Semana</option>
@@ -121,30 +126,41 @@
                             <!-- Adicione outras opções conforme necessário -->
                         </select>
                     </div>
+
+                    <div class="flex flex-col  mt-10 mx-auto">
+                        <label for="bandeiraTarifaria" class="text-lg text-black font-semibold">Selecione a bandeira:</label>
+                        <select id="bandeiraTarifaria" class="mt-2">
+                            <option value="verde">Bandeira Verde</option>
+                            <option value="amarela">Bandeira Amarela</option>
+                            <option value="vermelha1">Bandeira Vermelha - Patamar 1</option>
+                            <option value="vermelha2">Bandeira Vermelha - Patamar 2</option>
+                        </select>
+
+                    </div>
                 </div>
             </div>
-            
+
 
         </div>
     </div>
 
 
 
-    
 
 
 
-            <div id="chart-container" class="chart-container justify-center">
-                <canvas id="myChart" class="chart-canvas"></canvas>
-            </div>
-        </div>
+
+    <div id="chart-container" class="chart-container justify-center">
+        <canvas id="myChart" class="chart-canvas"></canvas>
+    </div>
+    </div>
 
 
-        
 
-        <div id="chart-container" class="chart-container">
-            <canvas id="myChart" class="chart-canvas"></canvas>
-        </div>
+
+    <div id="chart-container" class="chart-container">
+        <canvas id="myChart" class="chart-canvas"></canvas>
+    </div>
     </div>
 
 
@@ -152,7 +168,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const mac = "{{ $dispositivo->MAC }}";
-            let range = "{{ 'day' }}"; // Valor padrão
+            let range = "{{ 'hour' }}"; // Valor padrão
             let myChart = null; // Variável para armazenar a instância do gráfico
             let soma = 0; // Variável para armazenar a soma dos valores
 
@@ -232,15 +248,35 @@
                 const valorInput = document.getElementById('valor');
                 const valor = valorInput.value;
                 const kwhValue = parseFloat(document.getElementById('kwh').textContent);
-                const total = (valor * kwhValue).toFixed(2);
+
+                const bandeiraTarifariaSelect = document.getElementById('bandeiraTarifaria');
+                const selectedOption = bandeiraTarifariaSelect.options[bandeiraTarifariaSelect.selectedIndex];
+                const bandeiraTarifaria = selectedOption.value;
+
+                let tarifaAcrecimo = 0;
+
+                if (bandeiraTarifaria === "amarela") {
+                    tarifaAcrecimo = 0.01874;
+                } else if (bandeiraTarifaria === "vermelha1") {
+                    tarifaAcrecimo = 0.03971;
+                } else if (bandeiraTarifaria === "vermelha2") {
+                    tarifaAcrecimo = 0.09492;
+                }
+
+                const total = ((valor * kwhValue) + (tarifaAcrecimo * kwhValue)).toFixed(2);
 
                 document.getElementById('total').textContent = `Total: R$ ${total}`;
             }
 
+            // Escuta o evento de mudança no elemento <select> (bandeira tarifária)
+            document.getElementById('bandeiraTarifaria').addEventListener('change', function() {
+                updateTotalValue(); // Atualiza o valor total ao alterar a bandeira tarifária
+            });
+
             // Escuta o evento de mudança no elemento <input> (valor da taxa)
             document.getElementById('valor').addEventListener('input', function() {
                 updateTotalValue(); // Atualiza o valor total
-                
+
             });
 
             // Função para atualizar o valor em kWh
@@ -267,5 +303,63 @@
             }, 60000); // 60000 milissegundos = 1 minuto
         });
     </script>
+
+
+<script>
+    function printReport() {
+    const chartContainer = document.getElementById('chart-container');
+    const canvas = chartContainer.querySelector('canvas');
+    const chartImage = canvas.toDataURL();
+
+    const consumoKwh = document.getElementById('kwh').textContent;
+    const total = document.getElementById('total').textContent;
+
+    const nomeDispositivo = document.getElementById('nome').value;
+    const descricaoDispositivo = document.getElementById('descricao').value;
+    const macDispositivo = document.getElementById('mac').value;
+    const logo = `
+  <div style="display: flex; justify-content: center; align-items: center; height: 10vh;">
+    <img src="${window.location.origin}/img/Logotipo.png" alt="Logo" style="width: 200px; height: auto;">
+  </div>
+`;
+
+
+    const printWindow = window.open('', '_blank');
+    printWindow.document.open();
+    printWindow.document.write(`
+        <html>
+            <head>
+                <title>Relatório de Consumo</title>
+                <style>
+                    @media print {
+                        button {
+                            display: none;
+                        }
+                    }
+                </style>
+            </head>
+            <body>
+               ${logo}
+                <h1>Relatório de Consumo</h1>
+                <h2>Dados do Dispositivo:</h2>
+                <p>Nome: ${nomeDispositivo}</p>
+                <p>Descrição: ${descricaoDispositivo}</p>
+                <p>MAC: ${macDispositivo}</p>
+
+                <h2>Dados de Consumo:</h2>
+                <p>Consumo em kWh: ${consumoKwh}</p>
+                <p> ${total}</p>
+
+                <h2>Gráfico de Consumo:</h2>
+                <img src="${chartImage}" alt="Gráfico de Consumo">
+
+                <button onclick="window.print()" >Imprimir</button>
+            </body>
+        </html>
+    `);
+    printWindow.document.close();
+}
+
+</script>
 
 </x-app-layout>

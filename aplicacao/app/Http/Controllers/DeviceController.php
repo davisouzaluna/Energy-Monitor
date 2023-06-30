@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Intervention\Image\Facades\Image;
 use App\Models\Device;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\File;
 
 class DeviceController extends Controller
 {
@@ -33,9 +34,31 @@ class DeviceController extends Controller
     {
         $data = $request->all();
 
+        // Verifica se um arquivo de imagem foi enviado
+        if ($request->hasFile('imagem')) {
+            try {
+                $imagem = $request->file('imagem');
+
+                // Redimensiona a imagem para um tamanho máximo de 1280x720 pixels
+                $image = Image::make($imagem)->resize(1280, 720);
+
+                // Salva a imagem na pasta public/imagens com qualidade de 90%
+                $nomeArquivo = $imagem->getClientOriginalName();
+                $image->save(public_path('imagens/' . $nomeArquivo), 90);
+
+                // Define o caminho completo da imagem para o campo "imagem"
+                $data['imagem'] = 'imagens/' . $nomeArquivo;
+            } catch (\Exception $e) {
+                // Trate o erro de processamento ou armazenamento da imagem aqui
+                return redirect()->back()->with('error', 'Erro ao processar ou armazenar a imagem.');
+            }
+        } else {
+            // Define o valor padrão para o campo "imagem"
+            $data['imagem'] = 'img/img4_resize.jpeg';
+        }
+
         $register = Device::create($data);
 
-        //return redirect()->back();
         return redirect()->route('dashboard')->with('success', 'Dispositivo cadastrado com sucesso!');
     }
 
@@ -63,11 +86,37 @@ class DeviceController extends Controller
     {
         $dispositivo = Device::find($id);
 
-        $dispositivo->update($request->all());
+        $data = $request->all();
+
+        // Verifica se um arquivo de imagem foi enviado
+        if ($request->hasFile('imagem')) {
+            try {
+                $imagem = $request->file('imagem');
+
+                // Redimensiona a imagem para um tamanho máximo de 1280x720 pixels
+                $image = Image::make($imagem)->resize(1280, 720);
+                
+
+                // Salva a imagem na pasta public/imagens com qualidade de 90%
+                $nomeArquivo = $imagem->getClientOriginalName();
+                $image->save(public_path('imagens/' . $nomeArquivo), 90);
+
+                // Define o caminho completo da imagem para o campo "imagem"
+                $data['imagem'] = 'imagens/' . $nomeArquivo;
+            } catch (\Exception $e) {
+                // Trate o erro de processamento ou armazenamento da imagem aqui
+                return redirect()->back()->with('error', 'Erro ao processar ou armazenar a imagem.');
+            }
+
+            // Exclui a imagem anterior, se existir
+            if ($dispositivo->imagem) {
+                $this->deleteImage($dispositivo->imagem);
+            }
+        }
+
+        $dispositivo->update($data);
 
         return redirect()->route('device.edit', $id)->with('success', 'Dispositivo atualizado com sucesso!');
-
-        //return redirect()->route('device.index', $id)->with('success', 'Dispositivo atualizados com sucesso!');
     }
 
     /**
@@ -75,10 +124,28 @@ class DeviceController extends Controller
      */
     public function destroy(string $id)
     {
-        $device = Device::find($id);
-        $device->delete();
+        $dispositivo = Device::find($id);
 
-       /*return redirect()->route('device.index');*/
-       return redirect()->route('dashboard');
+        // Exclui a imagem associada ao dispositivo, se estiver na pasta "imagens"
+        if ($dispositivo->imagem && strpos($dispositivo->imagem, 'imagens/') === 0) {
+            $this->deleteImage($dispositivo->imagem);
+        }
+
+        $dispositivo->delete();
+
+        return redirect()->route('dashboard');
+    }
+    /**
+     * Delete the image file.
+     */
+    private function deleteImage(string $path)
+    {
+        // Obtém o caminho completo da imagem
+        $imagePath = public_path($path);
+
+        // Verifica se o arquivo existe e exclui
+        if (File::exists($imagePath)) {
+            File::delete($imagePath);
+        }
     }
 }

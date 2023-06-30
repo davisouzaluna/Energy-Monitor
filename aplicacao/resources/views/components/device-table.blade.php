@@ -3,7 +3,7 @@
         @foreach ($dispositivos as $dispositivo)
           <div class="col-12 col-md-4 mb-4">
             <div class="card primary-bg-color">
-              <img style="width:400px; " src="{{ asset('img/img3.jpeg') }}" class="card-img-top img-fluid" alt="Relógio">
+              <img style="width:400px; " src="{{ $dispositivo->imagem }}" class="card-img-top img-fluid" alt="Relógio">
               <div class="card-body">
                 <h5 class="card-category secondary-color">{{ $dispositivo->nome }}</h5>
                 <p class="card-title">{{ $dispositivo->descricao }}</p>
