@@ -346,7 +346,7 @@
                 <h2>Gráfico de Consumo:</h2>
                 <img src="${chartImage}" alt="Gráfico de Consumo">
 
-                <button onclick="window.print()">Imprimir</button>
+                <button onclick="window.print()" >Imprimir</button>
             </body>
         </html>
     `);
