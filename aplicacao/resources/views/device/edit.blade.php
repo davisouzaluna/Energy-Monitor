@@ -117,7 +117,6 @@
                     <div class="flex flex-col items-end mt-20 mx-auto">
                         <label for="rangeSelect" class="text-lg text-black font-semibold">Selecione o intervalo:</label>
                         <select id="rangeSelect" class="mt-2">
-                            <option value="minute">minuto</option>
                             <option value="hour">Hora</option>
                             <option value="day">Dia</option>
                             <option value="week">Semana</option>

@@ -39,6 +39,17 @@ class DeviceController extends Controller
             try {
                 $imagem = $request->file('imagem');
 
+                // Obtém o tamanho da imagem em bytes
+                $tamanhoImagem = $imagem->getSize();
+
+                // Define o limite máximo de tamanho em bytes (por exemplo, 5 MB)
+                $limiteTamanho = 5 * 1024 * 1024; // 5 MB
+
+                // Verifica se o tamanho da imagem excede o limite máximo
+                if ($tamanhoImagem > $limiteTamanho) {
+                    throw new \Exception('Tamanho da imagem excede o limite permitido.');
+                }
+
                 // Redimensiona a imagem para um tamanho máximo de 1280x720 pixels
                 $image = Image::make($imagem)->resize(1280, 720);
 
@@ -50,7 +61,7 @@ class DeviceController extends Controller
                 $data['imagem'] = 'imagens/' . $nomeArquivo;
             } catch (\Exception $e) {
                 // Trate o erro de processamento ou armazenamento da imagem aqui
-                return redirect()->back()->with('error', 'Erro ao processar ou armazenar a imagem.');
+                return redirect()->back()->with('error', 'Erro ao processar ou armazenar a imagem: ' . $e->getMessage());
             }
         } else {
             // Define o valor padrão para o campo "imagem"
@@ -61,6 +72,7 @@ class DeviceController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Dispositivo cadastrado com sucesso!');
     }
+
 
     /**
      * Display the specified resource.
@@ -95,7 +107,7 @@ class DeviceController extends Controller
 
                 // Redimensiona a imagem para um tamanho máximo de 1280x720 pixels
                 $image = Image::make($imagem)->resize(1280, 720);
-                
+
 
                 // Salva a imagem na pasta public/imagens com qualidade de 90%
                 $nomeArquivo = $imagem->getClientOriginalName();
