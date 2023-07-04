@@ -33,6 +33,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::get('/sobre', function () {
+    return view('sobre');
+})->name('sobre');
+
+Route::get('/time', function () {
+    return view('time');
+})->name('time');
+
+
 
 require __DIR__.'/auth.php';
 

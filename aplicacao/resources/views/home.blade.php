@@ -6,7 +6,7 @@
 
 
 
-<section class="dark:bg-gray-800 dark:text-gray-100">
+<section class="dark:bg-gray-800 dark:text-gray-100 dark:bg-white">
 	<div class="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between">
 		<div class="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
 			<h1 class="text-blue-700 text-5xl font-bold leading-none sm:text-6xl">
