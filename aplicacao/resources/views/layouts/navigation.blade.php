@@ -1,11 +1,11 @@
-<nav x-data="{ open: false }" class="bg-transparent border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-blue-200 border-b border-blue-100"><!-- Onde vai alterar a cor do header-->
     <!-- Primary Navigation Menu [#B9C6EC]-->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
                 <div class="mb-6 md:mb-0">
-                    <a href="dashboard" class="flex items-center">
+                    <a href="{{ route('dashboard') }}" class="flex items-center">
                       <div>
                         <img src="{{asset('img/Logotipo.png')}}" class="h-16 w-16" alt="Logo">
                       </div>

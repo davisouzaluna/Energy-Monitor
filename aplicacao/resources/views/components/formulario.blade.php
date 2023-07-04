@@ -1,7 +1,7 @@
 <div class="py-1 flex justify-center">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-4 sm:p-6 mt-1 mb-1">
+            <div class="p-4 sm:p-6 mt-4 mb-2">
                 <!-- Ajustando as margens superior (mt-4) e inferior (mb-2) aqui -->
                 <h2 class="text-lg font-semibold mb-4">{{ __('Cadastre um novo dispositivo:') }}</h2>
                 <form method="POST" action="{{ route('device.store') }}" enctype="multipart/form-data" class="space-y-6">

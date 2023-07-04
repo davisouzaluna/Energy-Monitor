@@ -157,11 +157,6 @@
 
 
 
-    <div id="chart-container" class="chart-container">
-        <canvas id="myChart" class="chart-canvas"></canvas>
-    </div>
-    </div>
-
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
@@ -303,9 +298,8 @@
         });
     </script>
 
-
 <script>
-    function printReport() {
+   function printReport() {
     const chartContainer = document.getElementById('chart-container');
     const canvas = chartContainer.querySelector('canvas');
     const chartImage = canvas.toDataURL();
@@ -317,48 +311,83 @@
     const descricaoDispositivo = document.getElementById('descricao').value;
     const macDispositivo = document.getElementById('mac').value;
     const logo = `
-  <div style="display: flex; justify-content: center; align-items: center; height: 10vh;">
-    <img src="${window.location.origin}/img/Logotipo.png" alt="Logo" style="width: 200px; height: auto;">
-  </div>
-`;
-
+        <div style="display: flex; justify-content: center; align-items: center; height: 10vh;">
+            <img src="${window.location.origin}/img/Logotipo.png" alt="Logo" style="width: 200px; height: auto;">
+        </div>
+    `;
 
     const printWindow = window.open('', '_blank');
     printWindow.document.open();
-    printWindow.document.write(`
-        <html>
-            <head>
-                <title>Relatório de Consumo</title>
-                <style>
-                    @media print {
-                        button {
-                            display: none;
+        printWindow.document.write(`
+            <html>
+                <head>
+                    <title>Relatório de Consumo</title>
+                    <style>
+                        @media print {
+                            button {
+                                display: none;
+                            }
                         }
-                    }
-                </style>
-            </head>
-            <body>
-               ${logo}
-                <h1>Relatório de Consumo</h1>
-                <h2>Dados do Dispositivo:</h2>
-                <p>Nome: ${nomeDispositivo}</p>
-                <p>Descrição: ${descricaoDispositivo}</p>
-                <p>MAC: ${macDispositivo}</p>
+                        body {
+                            text-align: center;
+                            margin: 0 auto;
+                        }
+                        .relatorio {
+                            margin: 0 auto;
+                            max-width: 800px;
+                            padding: 20px;
+                        }
+                        .relatorio h1 {
+                            font-size: 24px;
+                            margin-bottom: 20px;
+                        }
+                        .relatorio h2 {
+                            font-size: 18px;
+                            margin-bottom: 10px;
+                        }
+                        .relatorio p {
+                            font-size: 16px;
+                            margin-bottom: 5px;
+                        }
+                        .relatorio img {
+                            max-width: 100%;
+                            height: auto;
+                            margin-bottom: 10px;
+                        }
+                        
+                    </style>
+                </head>
+                <body>
+                    ${logo}
+                    <div id="relatorio" class="relatorio">
+                        <h1>Relatório de Consumo</h1>
+                        <h2>Dados do Dispositivo:</h2>
+                        <p>Nome: ${nomeDispositivo}</p>
+                        <p>Descrição: ${descricaoDispositivo}</p>
+                        <p>MAC: ${macDispositivo}</p>
 
-                <h2>Dados de Consumo:</h2>
-                <p>Consumo em kWh: ${consumoKwh}</p>
-                <p> ${total}</p>
+                        <h2>Dados de Consumo:</h2>
+                        <p>Consumo em kWh: ${consumoKwh}</p>
+                        <p>${total}</p>
 
-                <h2>Gráfico de Consumo:</h2>
-                <img src="${chartImage}" alt="Gráfico de Consumo">
+                        <h2>Gráfico de Consumo:</h2>
+                        <img src="${chartImage}" alt="Gráfico de Consumo">
+                    </div>
+                </body>
+            </html>
+        `);
+        printWindow.document.close();
 
-                <button onclick="window.print()" >Imprimir</button>
-            </body>
-        </html>
-    `);
-    printWindow.document.close();
+    window.setTimeout(() => {
+        printWindow.print();
+        printWindow.close();
+    }, 5);//tempo em milisegundos
 }
 
+// Chamar a função de impressão
+printReport();
+    
 </script>
+
 
 </x-app-layout>

@@ -1,6 +1,6 @@
 <footer class="bg-white dark:bg-white">
-  <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-6">
-    <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+  <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-3">
+    <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-2" />
     <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
       <div class="mb-6 md:mb-0">
         <a href="dashboard" class="flex items-center">
