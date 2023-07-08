@@ -2,12 +2,12 @@ import paho.mqtt.client as mqtt
 import time 
 import random 
   
-BROKER="localhost" #O broker público é test.mosquitto.org
+BROKER="test.mosquitto.org" #O broker público é test.mosquitto.org
 PORT=1883 
 KEEPALIVE=60 
-TOPIC="112233445566" 
+TOPIC="987654321012" 
 inicio_random=0#valor aleatório inicial 
-fim_random=50#valor aleatório limite. Referente à amperagem
+fim_random=3#valor aleatório limite. Referente à amperagem
 time_sleep_pub=1#Referente à amperagem
   
 #Publisher 

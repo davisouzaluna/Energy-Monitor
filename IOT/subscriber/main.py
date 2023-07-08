@@ -30,7 +30,7 @@ bd_manipulator.connect()
 mqtt_communicator.connect()
 
 # Inscrever-se em vários tópicos/DEBUG
-topics = [("BC:FF:4D:FB:5E:B4", 0), ("111111111111", 0), ("aquamon02", 0),("bc:ff:4d:fb:5e:b4",0),("112233445566",0)]
+topics = [("BC:FF:4D:FB:5E:B4", 0), ("111111111111", 0), ("aquamon02", 0),("bc:ff:4d:fb:5e:b4",0),("987654321012",0)]
 mqtt_communicator.subscribe_to_topics(topics)
 
 # Função de tratamento de sinal para interromper o programa corretamente
