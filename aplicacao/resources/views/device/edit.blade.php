@@ -384,11 +384,6 @@
     }, 5);//tempo em milisegundos
 }
 
-<<<<<<< HEAD
-// Chamar a função de impressão
-=======
->>>>>>> c3d21016e76466db2538a17d168e98f5360f296c
-
     
 </script>
 
