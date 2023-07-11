@@ -10,7 +10,7 @@
                 <div class="d-flex justify-content-center">
     
                   
-                    <a href="{{route('device.edit',$dispositivo->id)}}"<button class="px-3 py-1  bg-blue-500 text-white rounded-md transition ease-in-out delay-100 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-200 " type="submit">Visualizar</button></a>
+                    <a href="{{route('device.edit',$dispositivo->id)}}"<button class="mx-2 px-3 py-1  bg-blue-500 text-white rounded-md transition ease-in-out delay-100 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-200 " type="submit">Visualizar</button></a>
                   
     
                     <form action="{{ route('device.destroy', $dispositivo->id) }}" method="post">
