@@ -1,19 +1,19 @@
-#include <ESP8266WiFi.h>//biblioteca do esp
-#include <PubSubClient.h>//biblioteca do mqtt
+#include <ESP8266WiFi.h>
+#include <PubSubClient.h>
 
-const char* ssid = "";//nome da rede
-const char* password = "";//senha da rede
-const char* mqttServer = "test.mosquitto.org";//broker
+const char* ssid = "OriginaL DevelopmenT";
+const char* password = "kwy7514c";
+const char* mqttServer = "broker.hivemq.com";
 const int mqttPort = 1883;
 const char* mqttUser = "";
 const char* mqttPassword = "";
-const char* topic = "microondas";//tópico
+const char* topic = "112233445566";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
@@ -29,21 +29,9 @@ void setup() {
 }
 
 void loop() {
-  int value = random(0,50);//gera numeros aleatorios entre 0 e 50
-  char message[1000];
-  sprintf(message, "%d", value);
-  client.publish(topic, message);//publica a mensagem
-  delay(1000);//intervalo entre as mensagens
+  float value = random(5, 26) / 10.0; // Gera um número aleatório entre 0.5 e 2.5
+  char message[10];
+  sprintf(message, "%.1f", value);
+  client.publish(topic, message);
+  delay(1000);
 }
-
-
-//ps: como a placa É o node MCU, é preciso instalar a placa através
-//do link : http://arduino.esp8266.com/stable/package_esp8266com_index.json 
-//um tutorial para download da mesma: https://www.fvml.com.br/2018/12/instalando-biblioteca-do-modulo-esp8266.html
-
-
-//No meu caso foi conectado a placa na entrada usb, então atualiza essa opção quando for configurar a porta
-//a placa é o nodeMCU 1.0
-
-//precisa-se também instalar a biblioteca PubSubClient. No meu caso, eu pesquisei
-//PubSubClient e instalei a do autor Cloud4RPi , que por conseguinte, instalou as dependências

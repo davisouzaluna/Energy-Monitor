@@ -16,7 +16,7 @@
                     <form action="{{ route('device.destroy', $dispositivo->id) }}" method="post">
                         @csrf
                         @method('delete')
-                        <button class="px-2 py-1  bg-red-500 text-white rounded-md transition ease-in-out delay-100 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-red-500 duration-200 " type="submit">Excluir</button>
+                        <button class=" mx-2 px-2 py-1  bg-red-500 text-white rounded-md transition ease-in-out delay-100 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-red-500 duration-200 " type="submit">Excluir</button>
                     </form>
                 </div>
     

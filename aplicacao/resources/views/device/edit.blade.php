@@ -385,7 +385,7 @@
 }
 
 // Chamar a função de impressão
-printReport();
+
     
 </script>
 
