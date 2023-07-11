@@ -384,8 +384,7 @@
     }, 5);//tempo em milisegundos
 }
 
-// Chamar a função de impressão
-printReport();
+
     
 </script>
 

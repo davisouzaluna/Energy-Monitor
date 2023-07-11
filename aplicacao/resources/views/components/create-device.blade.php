@@ -12,16 +12,16 @@
         <div class="modal-body">
             <form method="POST" action="{{ route('device.store') }}" enctype="multipart/form-data" class="space-y-6 px-6 lg:px-8 pb-4 sm:pb-6 xl:pb-8">
                 @csrf
-                <div class="form-group">
-                    <label for="nome" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Nome:</label>
+                <div class="form-group dark:bg-white">
+                    <label for="nome" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-700">Nome:</label>
                     <input type="text" name="nome" id="nome" required value="{{ old('nome') }}" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" autocomplete="nome">
                 </div>
                 <div class="form-group">
-                    <label for="descricao" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Descrição:</label>
+                    <label for="descricao" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-700">Descrição:</label>
                     <input type="text" name="descricao" id="descricao" required value="{{ old('descricao') }}" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" autocomplete="descricao">
                 </div>
                 <div class="form-group">
-                    <label for="mac" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">MAC:</label>
+                    <label for="mac" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-700">MAC:</label>
                     <input type="text" maxlength="12" name="MAC" id="mac" required value="{{ old('MAC') }}" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" autocomplete="mac">
                 </div>
                 <div>
@@ -78,6 +78,7 @@
                 const cardImage = document.getElementById('card-image');
                 cardImage.src = imageUrl;
                 cardImage.style.display = 'block'; // Exibe a imagem
+                
 
                 // Limpa o campo de entrada de arquivo
                 event.target.value = '';
@@ -126,6 +127,8 @@
 
     .modal-body {
         padding: 1rem;
+        max-height: 80vh;
+        overflow-y: auto;
     }
 
     .modal-footer {
@@ -142,4 +145,5 @@
         cursor: pointer;
         font-size: 1.5rem;
     }
+    
 </style>

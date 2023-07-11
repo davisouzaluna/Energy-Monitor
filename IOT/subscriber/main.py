@@ -19,7 +19,7 @@ BIND = ""
 
 
 # Instanciar objetos
-bd_manipulator = BDManipulator("localhost", "root", "root", "energy_monitor", 3306)
+bd_manipulator = BDManipulator("localhost", "root", "rootroot", "energy_monitor", 3306)
 json_manipulator = JSONManipulator()
 mqtt_communicator = MQTTCommunicator(BROKER, PORT, KEEPALIVE, BIND)
 
