@@ -2,7 +2,7 @@ import paho.mqtt.client as mqtt
 import time 
 import random 
   
-BROKER="test.mosquitto.org" #O broker público é test.mosquitto.org
+BROKER="localhost" #O broker público é test.mosquitto.org
 PORT=1883 
 KEEPALIVE=60 
 TOPIC="987654321012" 
