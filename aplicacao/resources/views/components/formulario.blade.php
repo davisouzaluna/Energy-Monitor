@@ -13,14 +13,12 @@
                     </div>
                     <div>
                         <label for="descricao" class="mb-1 block font-semibold text-gray-700">Descrição:</label>
-                        <input type="text" name="descricao" id="descricao" required
-                            value="{{ old('descricao') }}" class="px-2 py-1 block w-full border-gray-300 rounded-md"
-                            autocomplete="descricao">
+                        <textarea name="descricao" id="descricao" required class="px-2 py-1 block w-full border-gray-300 rounded-md" autocomplete="descricao">{{ old('descricao') }}</textarea>
                     </div>
                     <div>
                         <label for="mac" class="mb-1 block font-semibold text-gray-700">MAC:</label>
-                        <input type="text" maxlength="12" name="MAC" id="mac" required value="{{ old('MAC') }}"
-                            class="px-2 py-1 block w-full border-gray-300 rounded-md" autocomplete="mac">
+                        <input type="text" maxlength="17" name="MAC" id="mac" required value="{{ old('MAC') }}" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" autocomplete="mac">
+                        <p id="mac-char-count" class="text-xs text-gray-500 mt-1">Máximo de 17 caracteres</p>
                         {{-- <small>O MAC deve conter exatamente 12 caracteres alfanuméricos (A-F, a-f, 0-9).</small> --}}
                     </div>
 
@@ -28,10 +26,6 @@
                         <button type="submit" class="px-4 py-2  bg-blue-500 text-white rounded-md transition ease-in-out delay-100 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-200 ">Enviar</button>
                     </div>
 
-                    <div>
-                        <label for="imagem" class="mb-1 block font-semibold text-gray-700">Imagem:</label>
-                        <input type="file" name="imagem" id="imagem" class="block w-full border-gray-300 rounded-md" accept="image/*" >
-                    </div>
 
                 </form>
             </div>
@@ -59,4 +53,22 @@
             }
         });
     });
+
+    
+const macInput = document.getElementById('mac');
+    const charCount = document.getElementById('mac-char-count');
+
+    macInput.addEventListener('input', function() {
+        const maxLength = parseInt(macInput.getAttribute('maxlength'));
+        const currentLength = macInput.value.length;
+
+        charCount.textContent = ` ${maxLength - currentLength} caracteres restantes`;
+
+        if (currentLength > maxLength) {
+            charCount.style.color = 'red'; // Altere a cor para a desejada em caso de excesso de caracteres
+        } else {
+            charCount.style.color = 'gray'; // Restaura a cor padrão quando dentro do limite
+        }
+    });
+
 </script>

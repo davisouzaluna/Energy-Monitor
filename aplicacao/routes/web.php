@@ -5,6 +5,7 @@ use App\Http\Controllers\LogErroController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\SensorController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TarifaController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Device;
 
@@ -71,7 +72,8 @@ Route::get('/sensor/ultimosDez/{topico}/{range?}', [SensorController::class, 'ul
 
 Route::get('/status/fetch', [StatusController::class, 'fetchStatus'])->name('status.fetch');
 
+Route::get('/tarifa',[TarifaController::class, 'obterTarifas']);
 
-
+Route::get('/tarifas',[TarifaController::class, 'obterDados']);
 
 

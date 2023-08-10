@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('sensor', function (Blueprint $table) {
             $table->id();
-            $table->string('MAC', 12);
+            $table->string('MAC', 17);
             $table->float('corrente');
             $table->dateTime('data_hora_medicao');
             $table->float('qos');

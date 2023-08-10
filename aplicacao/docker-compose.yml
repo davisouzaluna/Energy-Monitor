@@ -1,0 +1,41 @@
+version: '3'
+services:
+  laravel:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: laravel-app
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "8000:9000" # Mapeamento da porta do contêiner para a porta do host
+    depends_on:
+      - mysql
+      - mosquitto
+
+  npm-artisan:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: laravel-app
+    volumes:
+      - .:/var/www/html
+    working_dir: /var/www/html
+    command: /bin/sh -c "npm run dev && php artisan serve --host=0.0.0.0"
+    depends_on:
+      - laravel
+
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: energy_monitor
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    ports:
+      - "3308:3306" # Mapeamento da porta do contêiner para a porta do host
+
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    ports:
+      - "1883:1883" # Mapeamento da porta do contêiner para a porta do host

@@ -307,6 +307,12 @@
     const consumoKwh = document.getElementById('kwh').textContent;
     const total = document.getElementById('total').textContent;
 
+    const selectBandeira = document.getElementById('bandeiraTarifaria');
+    const opcaoSelecionada = selectBandeira.options[selectBandeira.selectedIndex];
+  const textoOpcaoSelecionada = opcaoSelecionada.text;
+
+
+
     const nomeDispositivo = document.getElementById('nome').value;
     const descricaoDispositivo = document.getElementById('descricao').value;
     const macDispositivo = document.getElementById('mac').value;
@@ -369,6 +375,7 @@
                         <h2>Dados de Consumo:</h2>
                         <p>Consumo em kWh: ${consumoKwh}</p>
                         <p>${total}</p>
+                        <p>Bandeira tarifária: ${textoOpcaoSelecionada}</p>
 
                         <h2>Gráfico de Consumo:</h2>
                         <img src="${chartImage}" alt="Gráfico de Consumo">
