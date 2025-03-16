@@ -1,24 +1,29 @@
 {
     "private": true,
     "scripts": {
-        "dev": "vite",
-        "build": "vite build"
+      "dev": "vite",
+      "dev:frontend": "vite", 
+      "dev:cypress": "cypress open", 
+      "dev:all": "concurrently \"npm run dev:frontend\" \"npm run dev:cypress\"" 
     },
     "devDependencies": {
-        "@inertiajs/vue3": "^1.0.0",
-        "@tailwindcss/forms": "^0.5.2",
-        "@vitejs/plugin-vue": "^4.0.0",
-        "alpinejs": "^3.4.2",
-        "autoprefixer": "^10.4.14",
-        "axios": "^1.1.2",
-        "laravel-vite-plugin": "^0.7.2",
-        "postcss": "^8.4.24",
-        "tailwindcss": "^3.3.2",
-        "vite": "^4.0.0",
-        "vue": "^3.2.41"
+      "@inertiajs/vue3": "^1.0.0",
+      "@tailwindcss/forms": "^0.5.2",
+      "@vitejs/plugin-vue": "^4.0.0",
+      "alpinejs": "^3.4.2",
+      "autoprefixer": "^10.4.14",
+      "axios": "^1.1.2",
+      "cypress": "^14.2.0",
+      "laravel-vite-plugin": "^0.7.2",
+      "postcss": "^8.4.24",
+      "tailwindcss": "^3.3.2",
+      "vite": "^4.0.0",
+      "vue": "^3.2.41",
+      "concurrently": "^7.0.0"
     },
     "dependencies": {
-        "chart.js": "^4.3.0",
-        "jspdf": "^2.5.1"
+      "chart.js": "^4.3.0",
+      "jspdf": "^2.5.1"
     }
-}
+  }
+  
