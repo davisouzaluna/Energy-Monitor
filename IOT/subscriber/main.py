@@ -12,14 +12,14 @@ from json_manipulator import JSONManipulator
 from mqtt_communicator import MQTTCommunicator
 
 #Variáveis de controle do MQTT
-BROKER = "broker.hivemq.com"
-PORT = 1883
+BROKER = "127.0.0.1"
+PORT = 1889
 KEEPALIVE = 60
 BIND = ""
 
 
 # Instanciar objetos
-bd_manipulator = BDManipulator("localhost", "root", "root", "energy_monitor", 3306)
+bd_manipulator = BDManipulator("localhost", "root", "root", "energy_monitor", 3309) # a porta eh a do container mysql
 json_manipulator = JSONManipulator()
 mqtt_communicator = MQTTCommunicator(BROKER, PORT, KEEPALIVE, BIND)
 

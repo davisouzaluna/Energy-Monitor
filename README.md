@@ -1,97 +1,95 @@
 <p align="center">
-<a href="#">
-<img src="aplicacao/public/img/Logotipo.png" height="20%" width="20%" alt="Logo Energy Monitor" />
-</a>
-</p>
-<h1 align="center">Energy Monitor</h1>
-<p align="center">Tenha o controle do consumo dos seus eletrodomésticos com o Energy Monitor. 🚀</p>
-<br/>
-
-<h2 align="center">Tecnologias utilizadas</h2>
-<div align="center">
-<div style="display: inline_block"><br> 
-<img align="center" alt="Energy-Js" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-plain.svg">
-
-<img align="center" alt="Energy-python" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" />
-<img align="center" alt="Energy-php" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" />
-<img align="center" alt="Energy-laravel" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain-wordmark.svg" />
-<img align="center" alt="Energy-mysql" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg" />
-</div>
-
-## Visão Geral
-
-<p align = "left">O Energy Monitor é uma aplicação de monitoramento de energia em tempo real que permite que o usuário tenha controle dos gastos na conta de energia
+  <a href="#">
+    <img src="aplicacao/public/img/Logotipo.png" height="20%" width="20%" alt="Logo Energy Monitor" />
+  </a>
 </p>
 
-<h2 align='center'> 📋 Pré-requisitos (Necessário instalar)</h2>
-<ul align='left'>
-<li>Python3</li>
-<li>MySql</li>
-<li>PHP 8.2</li>
-<li>Laravel</li>
-<li>Node</li>
-<li>Git</li>
-<li>NPM na versão estável</li>
-</ul>
+<h1 align="center">⚡ Energy Monitor</h1>
+
+<p align="center">
+  Tenha o controle do consumo dos seus eletrodomésticos com o <strong>Energy Monitor</strong>.
+</p>
 
 
-<h2 align='center'> 🔧 Executando o Projeto</h2>
 
-<h3 align='left'>1 - Acesse um terminal(uma janeja) e execute os seguintes comandos:</h3>
+## 🚀 Tecnologias Utilizadas  
+
+<p align="center">
+  <img alt="JavaScript" height="40" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-plain.svg">
+  <img alt="Python" height="40" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg">
+  <img alt="PHP" height="40" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg">
+  <img alt="Laravel" height="40" width="55" src="https://download.logo.wine/logo/Laravel/Laravel-Logo.wine.png">
+  <img alt="MySQL" height="40" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg">
+</p>
+
+
+## 🔍 Visão Geral  
+
+O **Energy Monitor** é uma aplicação de monitoramento de energia em tempo real que permite que os usuários acompanhem o consumo elétrico de seus eletrodomésticos. Isso ajuda no controle dos gastos e na otimização do consumo de energia.
+
+---
+
+## 📋 Pré-requisitos  
+
+Antes de começar, certifique-se de ter os seguintes requisitos instalados:
+
+- Python 3  
+- MySQL  
+- PHP 8.2  
+- Laravel  
+- Node.js  
+- Git  
+- NPM na versão estável  
+
+---
+
+## 🔧 Executando o Projeto  
+
+### 1️⃣ Clonando o repositório e iniciando a configuração  
+
+Abra um terminal e execute:  
 
 ```bash
 git clone https://github.com/davifurao/Energy-Monitor.git
-cd Energy-Monitor
-cd IOT
+cd Energy-Monitor/IOT
 sudo apt-get update && sudo apt-get upgrade
-bash verificacao.sh
+sudo bash verificacao.sh
+sudo docker compose up --build
 ```
-<h3 align='left'>2 - Acesse outro terminal e execute os seguintes comandos:</h3>
+### 2️⃣ Executando o Publisher
+O publisher precisará enviar dados simulando o funcionamento de um dispositivo IoT.Abra um segundo terminal e execute:
 
 ```bash
-cd Energy-Monitor
-cd IOT
+cd Energy-Monitor/IOT
 python3 publisher.py
 ```
-<h3 align='left'>3 - Acesse o terceiro terminal e execute os seguintes comandos:</h3>
+
+### 3️⃣ Executando o Subscriber (com insert no Banco de Dados)
+O subscriber é um microserviço que precisará ser executado a todo momento para receber a mensagem MQTT. Portanto abra um terceiro terminal e execute:
 
 ```bash
-cd Energy-Monitor
-cd IOT
+cd Energy-Monitor/IOT
 python3 subscriber-with-BD.py
 ```
 
+### 4️⃣ Configurando a Aplicação
+Na sua IDE , abra a pasta Aplicação:
+1.  Copie o arquivo <strong>.env.example</strong> e renomeie para <strong>.env</strong> lembrando de alterar as variaveis referentes a sua infra, como dados de login ao MySQL.
+2.  Abra o arquivo <strong>.env</strong> e insira as configurações do banco de dados.
 
-<h3 align='left'>4 - Em sua IDE (visual studio code ou afins) , abra a pasta Aplicação:</h3>
 
-Copie o arquivo .env.example renomeando sua cópia para .env
-Abra o .env e insira as informações referentes ao Banco de Dados
-
-<h3 align='left'>6 - Acesse o quinto terminal e execute os seguintes comandos:</h3>
-
-```bash
-cd Energy-Monitor
-cd aplicacao
-composer update
-npm install && npm run dev 
-```
-<h3 align='left'>7 - Acesse o sexto terminal e execute os seguintes comandos:</h3>
+### 5️⃣ Instalando Dependências
+Execute:
 
 ```bash
-cd Energy-Monitor
-cd aplicacao
+cd Energy-Monitor/aplicacao
+composer install
+php artisan key:generate
 php artisan migrate
 php artisan serve
 ```
-
-
-
+## 🎁 Agradecimentos
+Agradecemos a todos que participaram e apoiaram este projeto! Vocês são incríveis! 😃
 
 ## 📄 Licença
-
 Este projeto está sob a licença <a href='https://github.com/davifurao/Energy-Monitor/blob/main/LICENSE'>MIT</a>.
-
-## 🎁 Agradecimentos
-
-<p>Obrigado a todos que participaram, estão participando e irão participar, vocês são incríveis :grin: </p>
-
