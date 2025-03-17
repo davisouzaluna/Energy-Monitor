@@ -1,3 +1,11 @@
+/*
+Variaveis importantes: 
+
+Email Login: Teste@gmail.com
+Senha Login: 12345678
+
+*/
+
 describe('Cadastro do usuario nao existente', () => {
   it('passes', () => {
     cy.visit('http://localhost:8000')
